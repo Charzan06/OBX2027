@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Operation OBX 2027 | InfoHub</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
+
 <style>
 
+
 *{
+
 margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Inter',sans-serif;
+
 }
 
+
 html{
+
 scroll-behavior:smooth;
+
 }
+
 
 body{
 
@@ -33,7 +43,7 @@ overflow-x:hidden;
 }
 
 
-/* FIXED BACKGROUND IMAGE */
+/* PERMANENT BACKGROUND */
 
 body::before{
 
@@ -41,11 +51,7 @@ content:"";
 
 position:fixed;
 
-top:0;
-left:0;
-
-width:100%;
-height:100%;
+inset:0;
 
 background-image:url("images/2027%20OBX%20INFOHUB.png");
 
@@ -55,7 +61,7 @@ background-position:center top;
 
 background-repeat:no-repeat;
 
-background-color:#06243d;
+background-attachment:fixed;
 
 z-index:-2;
 
@@ -66,26 +72,26 @@ z-index:-2;
 
 .hero{
 
-height:100vh;
+min-height:100vh;
 
 display:flex;
 
-flex-direction:column;
+align-items:flex-end;
 
-justify-content:flex-end;
+justify-content:center;
 
-align-items:center;
+padding:0 20px 35px;
 
 text-align:center;
 
-padding:0 20px 25px;
-
 }
 
 
-/* Empty space so image is untouched */
-
 .hero-content{
+
+width:100%;
+
+max-width:500px;
 
 display:flex;
 
@@ -93,47 +99,14 @@ flex-direction:column;
 
 align-items:center;
 
-width:100%;
-
-transform:translateY(80px);
-
 }
 
 
-.hero h2{
-
-font-size:1.4rem;
-
-font-weight:800;
-
-text-shadow:0 3px 15px black;
-
-margin-bottom:20px;
-
-display:none;
-
-}
-
-
-.hero p{
-
-display:none;
-
-}
-
-
-/* COUNTDOWN */
-
-.countdown{
-
-display:none;
-
-}
-
-
-/* BUTTON AREA */
+/* BUTTONS */
 
 .mainButtons{
+
+width:100%;
 
 display:flex;
 
@@ -141,14 +114,12 @@ flex-direction:column;
 
 gap:14px;
 
-width:100%;
-
-max-width:360px;
-
 }
 
 
 .bigButton{
+
+display:block;
 
 padding:18px;
 
@@ -156,18 +127,20 @@ border-radius:20px;
 
 text-decoration:none;
 
-font-weight:900;
-
 font-size:1.1rem;
 
+font-weight:900;
+
 box-shadow:0 10px 25px rgba(0,0,0,.35);
+
+backdrop-filter:blur(8px);
 
 }
 
 
 .rsvp{
 
-background:#0284c7;
+background:rgba(14,165,233,.9);
 
 color:white;
 
@@ -176,7 +149,7 @@ color:white;
 
 .house{
 
-background:white;
+background:rgba(255,255,255,.92);
 
 color:#082f49;
 
@@ -185,19 +158,19 @@ color:#082f49;
 
 .food{
 
-background:#facc15;
+background:rgba(250,204,21,.9);
 
-color:#111;
+color:#111827;
 
 }
 
 
 
-/* SECTIONS */
+/* CONTENT */
 
 section{
 
-padding:50px 18px;
+padding:45px 18px;
 
 background:transparent;
 
@@ -208,13 +181,15 @@ background:transparent;
 
 background:rgba(255,255,255,.12);
 
-backdrop-filter:blur(8px);
+backdrop-filter:blur(12px);
 
 border-radius:28px;
 
+border:1px solid rgba(255,255,255,.18);
+
 padding:25px;
 
-border:1px solid rgba(255,255,255,.18);
+margin-bottom:20px;
 
 }
 
@@ -238,12 +213,14 @@ text-align:center;
 
 margin-bottom:25px;
 
+opacity:.9;
+
 }
 
 
 .card{
 
-background:rgba(255,255,255,.90);
+background:rgba(255,255,255,.92);
 
 color:#0f172a;
 
@@ -278,10 +255,9 @@ line-height:1.6;
 
 flex-direction:row;
 
-max-width:800px;
+max-width:850px;
 
 }
-
 
 .bigButton{
 
@@ -291,7 +267,9 @@ flex:1;
 
 }
 
+
 </style>
+
 
 </head>
 
@@ -299,15 +277,11 @@ flex:1;
 <body>
 
 
+
 <section class="hero">
 
 
 <div class="hero-content">
-
-
-<div class="countdown" id="countdown">
-Loading...
-</div>
 
 
 <div class="mainButtons">
@@ -321,7 +295,9 @@ Loading...
 
 
 <a class="bigButton house"
+
 target="_blank"
+
 href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean-grandeur">
 
 🏠 View House
@@ -329,7 +305,9 @@ href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean
 </a>
 
 
-<a class="bigButton food" href="#food">
+<a class="bigButton food"
+
+href="#food">
 
 🍽 Food
 
@@ -347,17 +325,27 @@ href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean
 <div class="glass">
 
 <div class="sectionTitle">
+
 📍 Trip Details
+
 </div>
 
+
 <div class="sectionSub">
-Everything you actually need to know before the invasion.
+
+Everything you need before the invasion.
+
 </div>
+
 
 
 <div class="card">
 
-<h3>🏖️ The House</h3>
+
+<h3>
+🏖️ The House
+</h3>
+
 
 <p>
 
@@ -382,7 +370,9 @@ Oceanfront • Private Pool • Swim-Up Bar • Hot Tubs • Theater • Arcade 
 
 
 <a class="bigButton house"
+
 target="_blank"
+
 href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean-grandeur">
 
 🏠 Open House Listing
@@ -393,6 +383,28 @@ href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean
 </div>
 
 
+
+<div class="card">
+
+
+<h3>
+🌊 The Mission
+</h3>
+
+
+<p>
+
+One giant family vacation.
+
+A week of beach days, pool time, food, laughs, and making memories.
+
+</p>
+
+
+</div>
+
+
+
 </div>
 
 </section>
@@ -401,6 +413,7 @@ href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean
 
 
 <section id="food">
+
 
 <div class="glass">
 
@@ -414,7 +427,7 @@ href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean
 
 <div class="sectionSub">
 
-The grocery store chaos has been eliminated.
+Nobody wants a vacation grocery-store argument.
 
 </div>
 
@@ -422,15 +435,20 @@ The grocery store chaos has been eliminated.
 
 <div class="card">
 
-<h3>👨‍🍳 Private Chef</h3>
+
+<h3>
+👨‍🍳 Private Chef
+</h3>
+
 
 <p>
 
 Meals will be handled by a private chef.
 
-Menus, allergies, and meal schedules will be added as plans are finalized.
+Menus, allergies, preferences, and schedules will be added as plans are finalized.
 
 </p>
+
 
 </div>
 
@@ -438,21 +456,27 @@ Menus, allergies, and meal schedules will be added as plans are finalized.
 
 <div class="card">
 
-<h3>☕ Coffee Emergency Plan</h3>
+
+<h3>
+☕ Coffee Operations
+
+</h3>
+
 
 <p>
 
-Coffee is considered mission-critical equipment.
+Coffee is considered essential equipment.
 
-Please do not remove the last cup without starting another pot.
+If you finish the pot, start another one.
 
 </p>
 
-</div>
-
-
 
 </div>
+
+
+</div>
+
 
 </section>
 
@@ -461,6 +485,7 @@ Please do not remove the last cup without starting another pot.
 
 
 <section>
+
 
 <div class="glass">
 
@@ -527,11 +552,14 @@ POST MESSAGE
 
 
 
+
 <div class="card">
 
 
 <h3>
+
 Latest Messages
+
 </h3>
 
 
@@ -539,7 +567,7 @@ Latest Messages
 
 <strong>Example:</strong><br>
 
-"Who is bringing the beach games?"
+"Who is bringing beach games?"
 
 </p>
 
@@ -551,13 +579,12 @@ Latest Messages
 
 <strong>Example:</strong><br>
 
-"The kids are already counting down."
+"The kids are already counting down!"
 
 </p>
 
 
 </div>
-
 
 
 </div>
@@ -570,6 +597,7 @@ Latest Messages
 
 
 <section>
+
 
 <div class="glass">
 
@@ -591,23 +619,31 @@ More information will be added here.
 
 <div class="card">
 
+
 <h3>
 📅 When?
 </h3>
 
+
 <p>
+
 August 7–14, 2027
+
 </p>
+
 
 </div>
 
 
 
+
 <div class="card">
+
 
 <h3>
 📍 Where?
 </h3>
+
 
 <p>
 
@@ -616,15 +652,18 @@ Outer Banks, North Carolina
 
 </p>
 
+
 </div>
 
 
 
 <div class="card">
 
+
 <h3>
 🧳 What should I bring?
 </h3>
+
 
 <p>
 
@@ -636,7 +675,9 @@ Your favorite vacation stuff
 
 </p>
 
+
 </div>
+
 
 
 </div>
@@ -647,7 +688,9 @@ padding:60px 18px 40px;
 text-align:center;
 ">
 
+
 <div class="glass">
+
 
 <h2 style="
 font-size:2rem;
@@ -659,40 +702,50 @@ margin-bottom:15px;
 </h2>
 
 
+
 <p style="
 line-height:1.7;
 ">
 
 One house.<br>
+
 One week.<br>
+
 One family.<br>
+
 A lifetime of stories.
 
 </p>
 
 
+
 <br>
 
 
-<p style="opacity:.8;">
+
+<p style="opacity:.85;">
 
 365 Ocean Grandeur<br>
+
 Kill Devil Hills, NC
 
 </p>
 
 
+
 <br>
 
 
+
 <p style="
-opacity:.65;
+opacity:.7;
 font-size:.9rem;
 ">
 
-More trip features coming soon.
+Family Vacation InfoHub
 
 </p>
+
 
 
 </div>
@@ -702,9 +755,10 @@ More trip features coming soon.
 
 
 
-
 <script>
 
+
+// Countdown can be turned on later when desired
 
 const tripDate = new Date("August 7, 2027 16:00:00").getTime();
 
@@ -715,59 +769,15 @@ function updateCountdown(){
 
 const now = new Date().getTime();
 
-
 const distance = tripDate - now;
 
 
-
 if(distance <= 0){
-
-document.getElementById("countdown").innerHTML =
-"🏖️ THE INVASION HAS BEGUN";
 
 return;
 
 }
 
-
-
-const days = Math.floor(
-distance/(1000*60*60*24)
-);
-
-
-
-const hours = Math.floor(
-(distance%(1000*60*60*24))/(1000*60*60)
-);
-
-
-
-const minutes = Math.floor(
-(distance%(1000*60*60))/(1000*60)
-);
-
-
-
-const seconds = Math.floor(
-(distance%(1000*60))/1000
-);
-
-
-
-document.getElementById("countdown").innerHTML =
-
-"<div style='font-size:2.8rem'>"+
-days+
-"</div>"+
-
-"<div>Days Until OBX</div>"+
-
-"<div style='margin-top:10px'>"+
-hours+"h "+
-minutes+"m "+
-seconds+"s"+
-"</div>";
 
 }
 
@@ -775,7 +785,6 @@ seconds+"s"+
 
 updateCountdown();
 
-setInterval(updateCountdown,1000);
 
 
 </script>
