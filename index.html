@@ -11,371 +11,393 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
 
+
 :root {
-    --ocean:#0284c7;
-    --deep:#082f49;
-    --sky:#e0f2fe;
-    --sand:#fef3c7;
-    --white:#ffffff;
-    --text:#0f172a;
+
+--ocean:#0284c7;
+--deep:#082f49;
+--sky:#e0f2fe;
+--sand:#fef3c7;
+--white:#ffffff;
+--text:#0f172a;
+
 }
 
 
 * {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Inter',Arial,sans-serif;
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',Arial,sans-serif;
+
 }
 
 
 html {
-    scroll-behavior:smooth;
+
+scroll-behavior:smooth;
+
 }
 
 
 body {
-    background:#f8fafc;
-    color:var(--text);
+
+background:#f8fafc;
+color:var(--text);
+padding-bottom:80px;
+
 }
 
 
+/* MOBILE APP STYLE NAV */
+
 nav {
 
-    position:fixed;
-    top:0;
-    width:100%;
-    z-index:1000;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:999;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+background:rgba(255,255,255,.92);
+backdrop-filter:blur(12px);
 
-    padding:16px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 
-    background:rgba(255,255,255,.9);
+padding:15px 18px;
 
-    backdrop-filter:blur(12px);
-
-    box-shadow:0 4px 20px rgba(0,0,0,.08);
+box-shadow:0 5px 20px rgba(0,0,0,.12);
 
 }
 
 
 .logo {
 
-    font-weight:900;
-    font-size:1.2rem;
-    color:var(--ocean);
+font-size:1.1rem;
+font-weight:900;
+color:var(--ocean);
 
 }
 
 
-.nav-links {
+.top-link {
 
-    display:none;
+text-decoration:none;
+font-weight:800;
+color:var(--deep);
+font-size:.9rem;
 
 }
 
+
+/* HERO */
 
 .hero {
 
-    min-height:100vh;
+min-height:100vh;
 
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+background:
+linear-gradient(
+180deg,
+#082f49,
+#0284c7
+);
 
-    text-align:center;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
 
-    color:white;
+padding:90px 20px 40px;
 
-    padding:30px;
-
-    background:
-
-    linear-gradient(
-        rgba(0,40,70,.55),
-        rgba(0,20,40,.75)
-    ),
-
-    url("images/2027%20OBX%20INFOHUB.png")
-    center/cover;
+text-align:center;
+color:white;
 
 }
 
+
+.hero-image {
+
+width:100%;
+max-width:520px;
+
+border-radius:28px;
+
+box-shadow:
+0 25px 60px rgba(0,0,0,.35);
+
+margin-bottom:25px;
+
+}
 
 
 .hero h1 {
 
-    font-size:clamp(3rem,12vw,6rem);
+font-size:clamp(2.5rem,10vw,5rem);
 
-    line-height:.9;
+font-weight:900;
 
-    font-weight:900;
+line-height:.95;
 
-    text-transform:uppercase;
+text-transform:uppercase;
 
 }
 
 
 .hero h2 {
 
-    margin-top:20px;
+margin-top:18px;
 
-    font-size:1.4rem;
+font-size:1.35rem;
 
 }
-
 
 
 .hero p {
 
-    max-width:650px;
+margin:20px auto;
 
-    margin:25px auto;
+max-width:500px;
 
-    font-size:1.1rem;
+line-height:1.6;
 
-    line-height:1.6;
+font-size:1.05rem;
 
 }
-
 
 
 .countdown {
 
-    margin:25px 0;
+background:rgba(255,255,255,.18);
 
-    padding:20px 30px;
+border-radius:25px;
 
-    background:rgba(255,255,255,.15);
+padding:20px;
 
-    border-radius:25px;
+font-weight:900;
 
-    backdrop-filter:blur(10px);
+font-size:1.5rem;
 
-    font-size:2rem;
+margin:20px 0;
 
-    font-weight:900;
+backdrop-filter:blur(10px);
 
 }
-
 
 
 .btn {
 
-    display:inline-block;
+display:block;
 
-    padding:15px 28px;
+width:100%;
 
-    border-radius:50px;
+max-width:350px;
 
-    background:#38bdf8;
+padding:18px;
 
-    color:white;
+border-radius:50px;
 
-    text-decoration:none;
+background:#38bdf8;
 
-    font-weight:900;
+color:white;
 
-    margin:5px;
+text-decoration:none;
+
+font-weight:900;
+
+margin:10px auto;
 
 }
 
+
+/* SECTIONS */
 
 
 section {
 
-    padding:70px 20px;
+padding:60px 18px;
 
 }
-
 
 
 .section-title {
 
-    text-align:center;
+text-align:center;
 
-    margin-bottom:40px;
+margin-bottom:30px;
 
 }
-
 
 
 .section-title h2 {
 
-    font-size:2rem;
+font-size:2rem;
 
-    font-weight:900;
+font-weight:900;
 
 }
-
 
 
 .section-title p {
 
-    margin-top:10px;
+margin-top:10px;
 
-    color:#475569;
+color:#475569;
 
 }
 
+
+/* CARDS */
 
 
 .grid {
 
-    display:grid;
+display:grid;
 
-    grid-template-columns:1fr;
+grid-template-columns:1fr;
 
-    gap:20px;
+gap:18px;
 
 }
-
 
 
 .card {
 
-    background:white;
+background:white;
 
-    border-radius:25px;
+padding:22px;
 
-    padding:25px;
+border-radius:25px;
 
-    box-shadow:
-    0 10px 30px rgba(0,0,0,.08);
+box-shadow:
+0 8px 25px rgba(0,0,0,.08);
+
+overflow:hidden;
 
 }
-
 
 
 .card h3 {
 
-    color:var(--ocean);
+color:var(--ocean);
 
-    margin-bottom:12px;
+font-size:1.25rem;
 
-    font-size:1.3rem;
+margin-bottom:12px;
 
 }
-
 
 
 .card p {
 
-    line-height:1.6;
+line-height:1.6;
 
 }
-
-
-
-.quick {
-
-    background:var(--sky);
-
-}
-
 
 
 .action {
 
-    display:block;
+display:block;
 
-    margin-top:18px;
+background:var(--deep);
 
-    padding:14px;
+color:white;
 
-    text-align:center;
+text-align:center;
 
-    border-radius:15px;
+padding:15px;
 
-    background:var(--deep);
+border-radius:18px;
 
-    color:white;
+text-decoration:none;
 
-    text-decoration:none;
+font-weight:800;
 
-    font-weight:800;
-
-}
-
-
-
-.badge {
-
-    display:inline-block;
-
-    background:#38bdf8;
-
-    color:white;
-
-    padding:8px 14px;
-
-    border-radius:30px;
-
-    margin:5px;
-
-    font-weight:700;
+margin-top:15px;
 
 }
 
 
+/* QUICK BUTTON AREA */
 
-.house {
 
-    background:white;
+.quick {
+
+background:var(--sky);
 
 }
 
+
+/* FLOOR PLANS */
+
+
+.floor-plans img {
+
+width:100%;
+
+border-radius:20px;
+
+margin-top:15px;
+
+}
+
+
+/* HOUSE */
 
 
 .house-image {
 
-    width:100%;
+width:100%;
 
-    height:260px;
+border-radius:25px;
 
-    object-fit:cover;
-
-    border-radius:25px;
-
-    margin-bottom:25px;
+margin-bottom:20px;
 
 }
 
 
-
-@media(min-width:768px){
-
-
-.nav-links {
-
-    display:flex;
-
-    gap:25px;
-
-}
+/* MOBILE BOTTOM MENU */
 
 
-.nav-links a {
+.mobile-menu {
 
-    text-decoration:none;
+position:fixed;
 
-    color:#334155;
+bottom:0;
 
-    font-weight:700;
+left:0;
 
-}
+width:100%;
 
+background:white;
 
-.grid {
+z-index:1000;
 
-    grid-template-columns:repeat(3,1fr);
+display:flex;
+
+justify-content:space-around;
+
+padding:12px 5px;
+
+box-shadow:0 -5px 20px rgba(0,0,0,.15);
 
 }
 
+
+.mobile-menu a {
+
+text-decoration:none;
+
+color:var(--deep);
+
+font-size:.75rem;
+
+font-weight:800;
+
+text-align:center;
 
 }
 
@@ -394,24 +416,45 @@ section {
 🌊 OBX 2027
 </div>
 
-
-<div class="nav-links">
-
-<a href="#home">Home</a>
-
-<a href="#house">House</a>
-
-<a href="#info">Info</a>
-
-<a href="#faq">FAQ</a>
-
-</div>
+<a class="top-link" href="#home">
+COMMAND CENTER
+</a>
 
 </nav>
 
 
+<div class="mobile-menu">
+
+<a href="#home">
+🏠<br>
+Home
+</a>
+
+<a href="#house">
+🏡<br>
+House
+</a>
+
+<a href="#food">
+🍽️<br>
+Food
+</a>
+
+<a href="#info">
+📍<br>
+Info
+</a>
+
+</div>
+
 
 <section class="hero" id="home">
+
+
+<img 
+src="images/2027%20OBX%20INFOHUB.png"
+class="hero-image"
+alt="Operation OBX 2027">
 
 
 <h1>
@@ -429,9 +472,8 @@ The Family Invasion of the Outer Banks
 One ridiculous oceanfront house.
 Seven days.
 Multiple generations.
-A questionable amount of sunscreen.
+A completely unnecessary amount of planning.
 </p>
-
 
 
 <div class="countdown" id="countdown">
@@ -444,14 +486,7 @@ ENTER COMMAND CENTER
 </a>
 
 
-</section>
-
-
-
-
-
-<section class="quick">
-
+</section><section class="quick">
 
 <div class="section-title">
 
@@ -460,66 +495,56 @@ Quick Access
 </h2>
 
 <p>
-Everything you need before the invasion begins.
+Everything needed before the invasion begins.
 </p>
 
 </div>
-
 
 
 <div class="grid">
 
 
-
 <div class="card">
 
 <h3>
-🏠 House Website
+🏠 The House
 </h3>
 
-
 <p>
-Tour 365 Ocean Grandeur before arrival.
+Tour 365 Ocean Grandeur. The largest rental in the Carolina Designs lineup. Basically a private resort that your family temporarily conquered.
 </p>
-
 
 <a class="action"
 href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean-grandeur"
 target="_blank">
 
-View House
+View House Listing
 
 </a>
 
-
 </div>
-
 
 
 
 <div class="card">
 
 <h3>
-📸 Photos
+📸 House Photos
 </h3>
 
-
 <p>
-Full property photos from Carolina Designs.
+Full property photos, amenities, and everything this ridiculous house has to offer.
 </p>
-
 
 <a class="action"
 href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean-grandeur"
 target="_blank">
 
-View Photos
+View Property Photos
 
 </a>
 
-
 </div>
-
 
 
 
@@ -530,26 +555,25 @@ View Photos
 </h3>
 
 <p>
-Explore the layout before arrival. Pick your battlefield wisely.
+Know the battlefield before arrival. Pick your rooms wisely.
 </p>
 
-<img src="images/ground-floor.jpg" 
-alt="Ground Floor Plan"
-style="width:100%;border-radius:20px;margin-top:15px;">
 
-<img src="images/first-floor.jpg" 
-alt="First Floor Plan"
-style="width:100%;border-radius:20px;margin-top:15px;">
+<div class="floor-plans">
 
-<img src="images/second-floor.jpg" 
-alt="Second Floor Plan"
-style="width:100%;border-radius:20px;margin-top:15px;">
+<img src="images/ground-floor.jpg" alt="Ground Floor Plan">
+
+<img src="images/first-floor.jpg" alt="First Floor Plan">
+
+<img src="images/second-floor.jpg" alt="Second Floor Plan">
 
 </div>
 
 
 </div>
 
+
+</div>
 
 </section>
 
@@ -557,39 +581,38 @@ style="width:100%;border-radius:20px;margin-top:15px;">
 
 
 
-<section class="house" id="house">
+<section id="house">
 
 
 <div class="section-title">
 
 <h2>
-🏝️ The Command Center
+🏝️ 365 Ocean Grandeur
 </h2>
 
-
 <p>
-365 Ocean Grandeur • Kill Devil Hills, North Carolina
+Kill Devil Hills, North Carolina • August 7-14, 2027
 </p>
 
-
 </div>
-
 
 
 <div class="grid">
 
 
+
 <div class="card">
 
 <h3>
-🌊 Oceanfront Location
+🌊 Oceanfront
 </h3>
 
 <p>
-Located directly on the Outer Banks with beach access and views that make everyone question why they don't live here.
+Walk straight onto the beach. No loading cars. No fighting for parking. Just wake up and hit the sand.
 </p>
 
 </div>
+
 
 
 
@@ -600,10 +623,11 @@ Located directly on the Outer Banks with beach access and views that make everyo
 </h3>
 
 <p>
-A private pool setup built for family gatherings, afternoon lounging, and questionable hydration choices.
+The official headquarters for relaxing, hanging out, and making questionable vacation decisions.
 </p>
 
 </div>
+
 
 
 
@@ -614,46 +638,11 @@ A private pool setup built for family gatherings, afternoon lounging, and questi
 </h3>
 
 <p>
-Two hot tubs for relaxing after beach days, fishing, and pretending you are not exhausted.
+Two hot tubs for after beach days, fishing trips, and pretending you are not exhausted.
 </p>
 
 </div>
 
-
-</div>
-
-
-</section>
-<section>
-
-<div class="section-title">
-
-<h2>
-🏠 House Breakdown
-</h2>
-
-<p>
-The largest rental in the Carolina Designs lineup. Basically a temporary resort.
-</p>
-
-</div>
-
-
-
-<div class="grid">
-
-
-<div class="card">
-
-<h3>
-🛏️ Sleeping Situation
-</h3>
-
-<p>
-30 bedrooms with enough space that hopefully nobody has to sleep on a couch and pretend it was "their choice."
-</p>
-
-</div>
 
 
 
@@ -664,10 +653,11 @@ The largest rental in the Carolina Designs lineup. Basically a temporary resort.
 </h3>
 
 <p>
-Movie nights, sports, and the occasional escape when the family energy reaches maximum capacity.
+Movie nights, sports, kids escaping adults, and adults escaping kids.
 </p>
 
 </div>
+
 
 
 
@@ -678,10 +668,11 @@ Movie nights, sports, and the occasional escape when the family energy reaches m
 </h3>
 
 <p>
-Where kids disappear and adults suddenly become very interested in video games.
+Where kids disappear and adults suddenly become very competitive.
 </p>
 
 </div>
+
 
 
 
@@ -692,10 +683,11 @@ Where kids disappear and adults suddenly become very interested in video games.
 </h3>
 
 <p>
-For anyone who wants to offset seven days of vacation food decisions.
+For anyone attempting to offset seven days of vacation food.
 </p>
 
 </div>
+
 
 
 
@@ -706,10 +698,11 @@ For anyone who wants to offset seven days of vacation food decisions.
 </h3>
 
 <p>
-A very important piece of vacation infrastructure.
+A critical piece of vacation infrastructure.
 </p>
 
 </div>
+
 
 
 
@@ -720,7 +713,7 @@ A very important piece of vacation infrastructure.
 </h3>
 
 <p>
-Because after organizing a trip this big, somebody is going to need it.
+Because planning a trip this large deserves compensation.
 </p>
 
 </div>
@@ -734,42 +727,15 @@ Because after organizing a trip this big, somebody is going to need it.
 </h3>
 
 <p>
-Helpful for luggage, groceries, and anyone who has already lost the stairs battle.
+For luggage, groceries, and anyone who has already lost the stairs battle.
 </p>
 
 </div>
 
 
 
-<div class="card">
-
-<h3>
-🚗 Parking
-</h3>
-
-<p>
-Large group parking available at the property.
-More details will be added before arrival.
-</p>
-
 </div>
 
-
-
-<div class="card">
-
-<h3>
-📶 WiFi + Amenities
-</h3>
-
-<p>
-Internet access, large kitchen, entertainment spaces, and everything needed for a week-long family invasion.
-</p>
-
-</div>
-
-
-</div>
 
 </section>
 
@@ -777,15 +743,14 @@ Internet access, large kitchen, entertainment spaces, and everything needed for 
 
 
 
-<section style="background:#e0f2fe;">
+<section id="food" style="background:#e0f2fe;">
 
 
 <div class="section-title">
 
 <h2>
-🍽️ The Food Operation
+🍽️ Food Operations
 </h2>
-
 
 <p>
 The grocery store chaos has been eliminated.
@@ -806,8 +771,7 @@ The grocery store chaos has been eliminated.
 </h3>
 
 <p>
-Meals will be handled by a professional chef.
-No more group texts debating who forgot the hamburger buns.
+Meals will be handled by a professional chef. No group text arguments about who forgot the hamburger buns.
 </p>
 
 </div>
@@ -818,14 +782,11 @@ No more group texts debating who forgot the hamburger buns.
 <div class="card">
 
 <h3>
-🥘 Vacation Dining
+☕ Coffee Operations
 </h3>
 
 <p>
-The goal:
-good food,
-less stress,
-more time enjoying the beach and pool.
+Coffee is considered a mission-critical resource. Treat accordingly.
 </p>
 
 </div>
@@ -836,12 +797,11 @@ more time enjoying the beach and pool.
 <div class="card">
 
 <h3>
-☕ Coffee Emergency Plan
+🍕 Vacation Dining
 </h3>
 
 <p>
-Coffee access is considered a critical operation.
-Please respect the caffeine-dependent members of the team.
+More beach time. More pool time. Less planning. Exactly how vacation should work.
 </p>
 
 </div>
@@ -851,7 +811,6 @@ Please respect the caffeine-dependent members of the team.
 
 
 </section>
-
 
 
 
@@ -866,9 +825,7 @@ Please respect the caffeine-dependent members of the team.
 📍 Mission Information
 </h2>
 
-
 </div>
-
 
 
 <div class="grid">
@@ -882,14 +839,18 @@ Please respect the caffeine-dependent members of the team.
 </h3>
 
 <p>
-
 365 Ocean Grandeur<br>
-
 1305 S Virginia Dare Trail<br>
-
 Kill Devil Hills, NC 27948
-
 </p>
+
+<a class="action"
+href="https://maps.google.com/?q=1305+S+Virginia+Dare+Trail+Kill+Devil+Hills+NC+27948"
+target="_blank">
+
+Open Map
+
+</a>
 
 </div>
 
@@ -903,17 +864,13 @@ Kill Devil Hills, NC 27948
 </h3>
 
 <p>
-
-Arrival:
-<br>
+Arrival:<br>
 August 7, 2027
 
 <br><br>
 
-Departure:
-<br>
+Departure:<br>
 August 14, 2027
-
 </p>
 
 </div>
@@ -924,42 +881,27 @@ August 14, 2027
 <div class="card">
 
 <h3>
-🌊 Area
+🏖️ Outer Banks
 </h3>
 
 <p>
-
-Outer Banks, North Carolina
-
-<br><br>
-
-Milepost 9 area with restaurants, groceries, fishing, and activities nearby.
-
+Restaurants, fishing, shopping, mini golf, ice cream, and enough activities to keep everyone entertained.
 </p>
 
 </div>
 
 
-
 </div>
 
 
-</section>
-
-
-
-
-
-
-<section>
+</section><section>
 
 
 <div class="section-title">
 
 <h2>
-📋 Before You Arrive
+📋 Before Arrival
 </h2>
-
 
 </div>
 
@@ -972,18 +914,17 @@ Milepost 9 area with restaurants, groceries, fishing, and activities nearby.
 <div class="card">
 
 <h3>
-🏖 Pack List
+🏖️ Packing List
 </h3>
 
 <p>
-
-Beach towels<br>
-Sunscreen<br>
 Swimsuits<br>
-Chairs<br>
+Sunscreen<br>
+Beach towels<br>
+Beach chairs<br>
 Coolers<br>
-Personal items
-
+Personal items<br>
+Anything you cannot live without for a week.
 </p>
 
 </div>
@@ -994,14 +935,13 @@ Personal items
 <div class="card">
 
 <h3>
-🏠 Room Assignments
+🛏️ Room Assignments
 </h3>
 
 <p>
 Coming soon.
 
-Choose wisely.
-There will absolutely be negotiations.
+Choose wisely. Room negotiations are expected.
 </p>
 
 </div>
@@ -1016,7 +956,7 @@ There will absolutely be negotiations.
 </h3>
 
 <p>
-Updates, reminders, and important information will live here.
+Updates, reminders, and important trip information will be added here.
 </p>
 
 </div>
@@ -1031,81 +971,17 @@ Updates, reminders, and important information will live here.
 
 
 
-
-<section id="faq">
-
-
-<div class="section-title">
-
-<h2>
-❓ Frequently Asked Questions
-</h2>
-
-
-</div>
-
-
-
-<div class="grid">
-
-
-<div class="card">
-
-<h3>
-Can I bring a pet?
-</h3>
-
-<p>
-Pet information will be confirmed before arrival.
-</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>
-What time is check-in?
-</h3>
-
-<p>
-Check-in details will be added from the rental information.
-</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>
-What happens if it rains?
-</h3>
-
-<p>
-Good news:
-this house has enough entertainment options that nobody has to stare at the walls.
-</p>
-
-</div>
-
-
-</div>
-
-
-</section>
 <section style="background:#082f49;color:white;">
 
 
 <div class="section-title">
 
 <h2>
-🚀 Future Command Center Upgrades
+🚀 Future Upgrades
 </h2>
 
 <p style="color:white;">
-This is only Version 1. The operation will expand.
+The command center will continue evolving.
 </p>
 
 </div>
@@ -1113,22 +989,6 @@ This is only Version 1. The operation will expand.
 
 
 <div class="grid">
-
-
-<div class="card">
-
-<h3>
-👥 Guest Dashboard
-</h3>
-
-<p>
-Future version:
-guest list, arrival dates, family groups, and important trip information all in one place.
-</p>
-
-</div>
-
-
 
 
 <div class="card">
@@ -1138,13 +998,10 @@ guest list, arrival dates, family groups, and important trip information all in 
 </h3>
 
 <p>
-Upload pictures during the trip.
-Create a shared family album.
-Save the memories without hunting through text messages.
+Upload pictures during the week. One place for everyone to save memories instead of digging through group texts.
 </p>
 
 </div>
-
 
 
 
@@ -1156,7 +1013,7 @@ Save the memories without hunting through text messages.
 
 <p>
 Future additions:
-tides, fishing reports, catches, and bragging rights leaderboard.
+tides, fishing reports, catches, and bragging rights.
 </p>
 
 </div>
@@ -1171,7 +1028,7 @@ tides, fishing reports, catches, and bragging rights leaderboard.
 </h3>
 
 <p>
-Teams, scores, closest-to-pin, longest drive, and completely unnecessary competition.
+Teams, scores, closest-to-pin, longest drive, and unnecessary competition.
 </p>
 
 </div>
@@ -1186,7 +1043,7 @@ Teams, scores, closest-to-pin, longest drive, and completely unnecessary competi
 </h3>
 
 <p>
-Private tracking for deposits, balances, and deadlines.
+Future private tracking for deposits, balances, and deadlines.
 </p>
 
 </div>
@@ -1197,11 +1054,26 @@ Private tracking for deposits, balances, and deadlines.
 <div class="card">
 
 <h3>
-📱 Mobile App Feel
+👥 Guest Dashboard
 </h3>
 
 <p>
-Designed to eventually become a full family vacation dashboard.
+RSVPs, arrival dates, family groups, and trip details all in one place.
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+📱 Vacation App
+</h3>
+
+<p>
+Eventually this becomes a reusable family vacation command center.
 </p>
 
 </div>
@@ -1216,56 +1088,71 @@ Designed to eventually become a full family vacation dashboard.
 
 
 
-
-<section>
+<section id="faq">
 
 
 <div class="section-title">
 
 <h2>
-⚠ Official Vacation Warning
+❓ Frequently Asked Questions
 </h2>
 
 </div>
 
 
 
+
+<div class="grid">
+
+
+
 <div class="card">
 
+<h3>
+🐶 Can I bring a pet?
+</h3>
 
 <p>
-
-By entering Operation OBX 2027, you acknowledge:
-
-<br><br>
-
-✔ Someone will forget something important.
-
-<br>
-
-✔ Someone will wake up too early.
-
-<br>
-
-✔ Someone will say "we should do this every year."
-
-<br>
-
-✔ Someone will eat the last snack without admitting it.
-
-<br>
-
-✔ Everyone will have a great time anyway.
-
+Pet information will be confirmed before arrival.
 </p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+⏰ Check-In?
+</h3>
+
+<p>
+Final check-in details will be added from the rental information.
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+🌧️ What if it rains?
+</h3>
+
+<p>
+Good news. This house has enough entertainment options that nobody has to stare at a wall.
+</p>
+
+</div>
 
 
 </div>
 
 
 </section>
-
-
 
 
 
@@ -1277,27 +1164,40 @@ By entering Operation OBX 2027, you acknowledge:
 <div class="section-title">
 
 <h2>
-🌅 Until Then...
+⚠ Vacation Warning
 </h2>
-
-<p>
-Prepare yourselves.
-The Outer Banks awaits.
-</p>
 
 </div>
 
 
-<div style="text-align:center;">
 
+<div class="card">
 
-<a class="btn"
-href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean-grandeur"
-target="_blank">
+<p>
 
-Explore 365 Ocean Grandeur
+By entering Operation OBX 2027, you acknowledge:
 
-</a>
+<br><br>
+
+✔ Someone will forget something important.
+
+<br><br>
+
+✔ Someone will wake up too early.
+
+<br><br>
+
+✔ Someone will say "we should do this every year."
+
+<br><br>
+
+✔ Someone will eat the last snack and deny everything.
+
+<br><br>
+
+✔ Everyone will have an awesome time anyway.
+
+</p>
 
 
 </div>
@@ -1309,8 +1209,44 @@ Explore 365 Ocean Grandeur
 
 
 
+<section>
 
-<footer>
+
+<div class="section-title">
+
+<h2>
+🌅 Until Then...
+</h2>
+
+<p>
+Prepare yourselves. The Outer Banks awaits.
+</p>
+
+</div>
+
+
+
+<a class="btn"
+href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean-grandeur"
+target="_blank">
+
+Explore 365 Ocean Grandeur
+
+</a>
+
+
+</section>
+
+
+
+
+
+<footer style="
+background:#082f49;
+color:white;
+padding:40px 20px;
+text-align:center;
+">
 
 
 <h2>
@@ -1323,16 +1259,12 @@ The Family Invasion of the Outer Banks
 </p>
 
 
-<br>
-
-
-<p>
+<p style="margin-top:20px;">
 Built for memories, chaos, and one legendary week.
 </p>
 
 
 </footer>
-
 
 
 
@@ -1354,30 +1286,26 @@ const now = new Date().getTime();
 const distance = tripDate - now;
 
 
-
 const days = Math.floor(
-distance / (1000 * 60 * 60 * 24)
+distance / (1000*60*60*24)
 );
-
 
 
 const hours = Math.floor(
-(distance % (1000 * 60 * 60 * 24)) /
-(1000 * 60 * 60)
+(distance % (1000*60*60*24))
+/(1000*60*60)
 );
-
 
 
 const minutes = Math.floor(
-(distance % (1000 * 60 * 60)) /
-(1000 * 60)
+(distance % (1000*60*60))
+/(1000*60)
 );
 
 
-
 const seconds = Math.floor(
-(distance % (1000 * 60)) /
-1000
+(distance % (1000*60))
+/1000
 );
 
 
@@ -1401,7 +1329,6 @@ updateCountdown();
 
 
 setInterval(updateCountdown,1000);
-
 
 
 </script>
