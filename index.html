@@ -23,13 +23,17 @@ scroll-behavior:smooth;
 }
 
 body{
+
+color:white;
+
 background:#06243d;
-color:#fff;
+
 overflow-x:hidden;
-position:relative;
+
 }
 
-/* ===== Fixed Beach Background ===== */
+
+/* FIXED BACKGROUND IMAGE */
 
 body::before{
 
@@ -43,11 +47,9 @@ left:0;
 width:100%;
 height:100%;
 
-background:
-linear-gradient(rgba(4,28,48,.35),rgba(4,28,48,.65)),
-url("images/2027%20OBX%20INFOHUB.png");
+background-image:url("images/2027%20OBX%20INFOHUB.png");
 
-background-size:contain;
+background-size:cover;
 
 background-position:center top;
 
@@ -57,65 +59,12 @@ z-index:-2;
 
 }
 
-/* ===== Navigation ===== */
 
-nav{
-
-position:fixed;
-
-top:0;
-
-left:0;
-
-width:100%;
-
-padding:16px 18px;
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-background:transparent;
-
-backdrop-filter:blur(14px);
-
-z-index:999;
-
-}
-
-.logo{
-
-font-size:1.25rem;
-
-font-weight:900;
-
-letter-spacing:1px;
-
-}
-
-.rsvpTop{
-
-background:#0ea5e9;
-
-padding:12px 22px;
-
-border-radius:40px;
-
-color:white;
-
-text-decoration:none;
-
-font-weight:800;
-
-}
-
-/* ===== Hero ===== */
+/* HERO SPLASH */
 
 .hero{
 
-min-height:90vh;
+height:100vh;
 
 display:flex;
 
@@ -123,79 +72,62 @@ flex-direction:column;
 
 justify-content:flex-end;
 
-padding:60px 24px 55px;
+align-items:center;
 
 text-align:center;
 
-}
-
-.hero h1{
-
-font-size:clamp(3rem,13vw,5.7rem);
-
-font-weight:900;
-
-line-height:.88;
-
-text-transform:uppercase;
-
-text-shadow:0 5px 20px rgba(0,0,0,.45);
+padding:0 20px 50px;
 
 }
 
-.hero h2{
 
-margin-top:18px;
+/* Empty space so image is untouched */
 
-font-size:1.3rem;
+.hero-content{
 
-font-weight:700;
+display:flex;
 
-opacity:.95;
+flex-direction:column;
 
-}
-
-.hero p{
-
-margin:24px auto;
-
-max-width:550px;
-
-line-height:1.7;
-
-font-size:1.05rem;
-
-color:#eef8ff;
-
-}
-
-/* ===== Countdown ===== */
-
-.countdown{
-
-margin:10px auto 28px;
-
-padding:20px;
+align-items:center;
 
 width:100%;
 
-max-width:340px;
+}
 
-border-radius:24px;
 
-background:rgba(255,255,255,.14);
+.hero h2{
 
-backdrop-filter:blur(12px);
+font-size:1.4rem;
 
-font-size:1.45rem;
+font-weight:800;
 
-font-weight:900;
+text-shadow:0 3px 15px black;
 
-box-shadow:0 15px 40px rgba(0,0,0,.25);
+margin-bottom:20px;
+
+display:none;
 
 }
 
-/* ===== Buttons ===== */
+
+.hero p{
+
+display:none;
+
+}
+
+
+/* COUNTDOWN */
+
+.countdown{
+
+display:none;
+
+}
+
+
+/* BUTTON AREA */
 
 .mainButtons{
 
@@ -209,37 +141,34 @@ width:100%;
 
 max-width:360px;
 
-margin:auto;
-
 }
+
 
 .bigButton{
 
-display:block;
-
 padding:18px;
 
-border-radius:18px;
+border-radius:20px;
 
 text-decoration:none;
 
-font-weight:800;
+font-weight:900;
 
-font-size:1.08rem;
+font-size:1.1rem;
 
-transition:.25s;
-
-box-shadow:0 12px 25px rgba(0,0,0,.28);
+box-shadow:0 10px 25px rgba(0,0,0,.35);
 
 }
 
+
 .rsvp{
 
-background:#0ea5e9;
+background:#0284c7;
 
 color:white;
 
 }
+
 
 .house{
 
@@ -249,45 +178,42 @@ color:#082f49;
 
 }
 
+
 .food{
 
 background:#facc15;
 
-color:#111827;
+color:#111;
 
 }
 
-.bigButton:hover{
 
-transform:translateY(-3px);
 
-}
-
-/* ===== Sections ===== */
+/* SECTIONS */
 
 section{
 
-padding:60px 18px;
+padding:50px 18px;
+
+background:transparent;
 
 }
+
 
 .glass{
 
-background:rgba(255,255,255,.14);
+background:rgba(255,255,255,.12);
 
-backdrop-filter:blur(14px);
-
-border:1px solid rgba(255,255,255,.15);
+backdrop-filter:blur(8px);
 
 border-radius:28px;
 
-padding:26px;
+padding:25px;
 
-margin-bottom:22px;
-
-box-shadow:0 15px 35px rgba(0,0,0,.22);
+border:1px solid rgba(255,255,255,.18);
 
 }
+
 
 .sectionTitle{
 
@@ -295,25 +221,25 @@ font-size:2rem;
 
 font-weight:900;
 
-margin-bottom:10px;
-
 text-align:center;
 
+margin-bottom:12px;
+
 }
+
 
 .sectionSub{
 
 text-align:center;
 
-margin-bottom:28px;
-
-opacity:.9;
+margin-bottom:25px;
 
 }
 
+
 .card{
 
-background:rgba(255,255,255,.94);
+background:rgba(255,255,255,.90);
 
 color:#0f172a;
 
@@ -323,17 +249,17 @@ padding:22px;
 
 margin-bottom:18px;
 
-box-shadow:0 12px 30px rgba(0,0,0,.18);
-
 }
+
 
 .card h3{
 
 color:#0284c7;
 
-margin-bottom:12px;
+margin-bottom:10px;
 
 }
+
 
 .card p{
 
@@ -341,35 +267,21 @@ line-height:1.6;
 
 }
 
+
 @media(min-width:768px){
-
-.hero{
-
-justify-content:center;
-
-padding-top:120px;
-
-}
 
 .mainButtons{
 
 flex-direction:row;
 
-max-width:900px;
+max-width:800px;
 
 }
+
 
 .bigButton{
 
 flex:1;
-
-}
-
-section{
-
-max-width:900px;
-
-margin:auto;
 
 }
 
@@ -379,43 +291,30 @@ margin:auto;
 
 </head>
 
+
 <body>
+
 
 <section class="hero">
 
-<h2>
 
-The Family Invasion of the Outer Banks
+<div class="hero-content">
 
-</h2>
-
-<p>
-
-One ridiculous beach house.
-
-Seven unforgettable days.
-
-Too much food.
-
-Too many laughs.
-
-And somebody is definitely going to forget their charger.
-
-</p>
 
 <div class="countdown" id="countdown">
-
 Loading...
-
 </div>
 
+
 <div class="mainButtons">
+
 
 <a class="bigButton rsvp" href="rsvp.html">
 
 🔥 RSVP
 
 </a>
+
 
 <a class="bigButton house"
 target="_blank"
@@ -425,13 +324,19 @@ href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean
 
 </a>
 
+
 <a class="bigButton food" href="#food">
 
 🍽 Food
 
 </a>
 
+
 </div>
+
+
+</div>
+
 
 </section><section>
 
@@ -442,8 +347,9 @@ href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean
 </div>
 
 <div class="sectionSub">
-Everything you actually need to know.
+Everything you actually need to know before the invasion.
 </div>
+
 
 <div class="card">
 
@@ -452,7 +358,9 @@ Everything you actually need to know.
 <p>
 
 <b>365 Ocean Grandeur</b><br>
+
 1305 S Virginia Dare Trail<br>
+
 Kill Devil Hills, NC 27948
 
 <br><br>
@@ -461,25 +369,30 @@ Kill Devil Hills, NC 27948
 
 <br><br>
 
-Oceanfront • Private Pool • Swim-Up Bar • Hot Tubs • Theater • Arcade • Gym • Elevator • Direct Beach Access
+Oceanfront • Private Pool • Swim-Up Bar • Hot Tubs • Theater • Arcade • Gym • Elevator • Beach Access
 
 </p>
 
+
 <br>
+
 
 <a class="bigButton house"
 target="_blank"
 href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean-grandeur">
 
-🏠 Open Carolina Designs Listing
+🏠 Open House Listing
 
 </a>
 
+
 </div>
+
 
 </div>
 
 </section>
+
 
 
 
@@ -487,13 +400,21 @@ href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean
 
 <div class="glass">
 
+
 <div class="sectionTitle">
-🍽️ Food
+
+🍽️ Food Plan
+
 </div>
 
+
 <div class="sectionSub">
-Nobody has to fight over who's bringing ketchup.
+
+The grocery store chaos has been eliminated.
+
 </div>
+
+
 
 <div class="card">
 
@@ -501,29 +422,31 @@ Nobody has to fight over who's bringing ketchup.
 
 <p>
 
-Meals for the week will be prepared by a private chef.
+Meals will be handled by a private chef.
 
-Menus, allergy information, and meal times will be posted here before the trip.
+Menus, allergies, and meal schedules will be added as plans are finalized.
 
 </p>
 
 </div>
+
+
 
 <div class="card">
 
-<h3>☕ Coffee Policy</h3>
+<h3>☕ Coffee Emergency Plan</h3>
 
 <p>
 
-Coffee is considered essential life support.
+Coffee is considered mission-critical equipment.
 
-Do not consume the last cup without starting another pot.
-
-Violators may be publicly shamed.
+Please do not remove the last cup without starting another pot.
 
 </p>
 
 </div>
+
+
 
 </div>
 
@@ -531,9 +454,12 @@ Violators may be publicly shamed.
 
 
 
+
+
 <section>
 
 <div class="glass">
+
 
 <div class="sectionTitle">
 
@@ -541,84 +467,101 @@ Violators may be publicly shamed.
 
 </div>
 
+
 <div class="sectionSub">
 
-Leave updates, jokes, questions, or trash talk.
+Questions, updates, jokes, and trip planning.
 
 </div>
 
+
+
 <div class="card">
 
+
 <textarea
-placeholder="What's on your mind?"
+
+placeholder="Write a message..."
+
 style="
 width:100%;
-height:140px;
-padding:16px;
-border-radius:16px;
+height:130px;
+padding:15px;
+border-radius:15px;
 border:none;
 font-size:16px;
-resize:vertical;
-"></textarea>
+resize:none;
+"
+
+></textarea>
+
 
 <br><br>
 
+
 <button
+
 style="
 width:100%;
-padding:18px;
+padding:16px;
 border:none;
-border-radius:16px;
+border-radius:15px;
 background:#0284c7;
 color:white;
 font-size:18px;
-font-weight:800;
-cursor:pointer;
-">
+font-weight:900;
+"
+
+>
 
 POST MESSAGE
 
 </button>
 
+
 </div>
+
+
 
 <div class="card">
 
-<h3>Latest Messages</h3>
+
+<h3>
+Latest Messages
+</h3>
+
 
 <p>
 
-<strong>Mike</strong><br>
+<strong>Example:</strong><br>
 
-"Who's bringing the cornhole boards?"
+"Who is bringing the beach games?"
 
 </p>
+
 
 <hr style="margin:18px 0;">
 
-<p>
-
-<strong>Kelly</strong><br>
-
-"The kids have already packed... six weeks early."
-
-</p>
-
-<hr style="margin:18px 0;">
 
 <p>
 
-<strong>Steve</strong><br>
+<strong>Example:</strong><br>
 
-"I call dibs on not cooking."
+"The kids are already counting down."
 
 </p>
 
-</div>
 
 </div>
+
+
+
+</div>
+
 
 </section>
+
+
 
 
 
@@ -626,155 +569,213 @@ POST MESSAGE
 
 <div class="glass">
 
+
 <div class="sectionTitle">
 
 ❓ FAQ
 
 </div>
 
+
 <div class="sectionSub">
 
-We'll keep adding to this.
+More information will be added here.
 
 </div>
 
+
+
 <div class="card">
 
-<h3>🐶 Pets?</h3>
+<h3>
+📅 When?
+</h3>
+
+<p>
+August 7–14, 2027
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+📍 Where?
+</h3>
 
 <p>
 
-We'll follow whatever the house rental allows. Final details will be posted before the trip.
+Kill Devil Hills<br>
+Outer Banks, North Carolina
 
 </p>
 
 </div>
 
+
+
 <div class="card">
 
-<h3>🧳 What should I bring?</h3>
+<h3>
+🧳 What should I bring?
+</h3>
 
 <p>
 
-Beach towels
-
-<br>Swimsuit
-
-<br>Sunscreen
-
-<br>Flip flops
-
-<br>Your favorite beach drink
-
-<br>A good attitude
+Beach gear<br>
+Sunscreen<br>
+Swimsuits<br>
+Personal items<br>
+Your favorite vacation stuff
 
 </p>
 
 </div>
 
-<div class="card">
-
-<h3>🚗 Parking</h3>
-
-<p>
-
-There is parking at the house.
-
-We'll post vehicle recommendations closer to check-in once we know who's driving.
-
-</p>
 
 </div>
 
-</div>
 
-</section><footer style="padding:70px 20px 40px;text-align:center;">
+</section><footer style="
+padding:60px 18px 40px;
+text-align:center;
+">
 
 <div class="glass">
 
-<h2 style="font-size:2rem;margin-bottom:15px;">
+<h2 style="
+font-size:2rem;
+margin-bottom:15px;
+">
 
 🌊 Operation OBX 2027
 
 </h2>
 
-<p style="font-size:1.05rem;line-height:1.7;">
 
-One house.
+<p style="
+line-height:1.7;
+">
 
-One week.
-
-One family.
-
+One house.<br>
+One week.<br>
+One family.<br>
 A lifetime of stories.
 
 </p>
 
+
 <br>
+
 
 <p style="opacity:.8;">
 
-365 Ocean Grandeur • Kill Devil Hills, NC
+365 Ocean Grandeur<br>
+Kill Devil Hills, NC
 
 </p>
+
 
 <br>
 
-<p style="opacity:.65;font-size:.9rem;">
 
-Version 1.0 • More features coming soon
+<p style="
+opacity:.65;
+font-size:.9rem;
+">
+
+More trip features coming soon.
 
 </p>
 
+
 </div>
+
 
 </footer>
 
+
+
+
 <script>
+
 
 const tripDate = new Date("August 7, 2027 16:00:00").getTime();
 
+
+
 function updateCountdown(){
+
 
 const now = new Date().getTime();
 
+
 const distance = tripDate - now;
+
+
 
 if(distance <= 0){
 
-document.getElementById("countdown").innerHTML="🏖️ WE'RE HERE!";
+document.getElementById("countdown").innerHTML =
+"🏖️ THE INVASION HAS BEGUN";
 
 return;
 
 }
 
-const days=Math.floor(distance/(1000*60*60*24));
 
-const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
 
-const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+const days = Math.floor(
+distance/(1000*60*60*24)
+);
 
-const seconds=Math.floor((distance%(1000*60))/1000);
 
-document.getElementById("countdown").innerHTML=
 
-"<div style='font-size:2.6rem;'>"+days+"</div>"+
+const hours = Math.floor(
+(distance%(1000*60*60*24))/(1000*60*60)
+);
 
-"<div style='font-size:1rem;opacity:.85;'>Days Until OBX</div>"+
 
-"<div style='margin-top:10px;font-size:1.1rem;'>"+
 
-hours+"h "+minutes+"m "+seconds+"s"+
+const minutes = Math.floor(
+(distance%(1000*60*60))/(1000*60)
+);
 
+
+
+const seconds = Math.floor(
+(distance%(1000*60))/1000
+);
+
+
+
+document.getElementById("countdown").innerHTML =
+
+"<div style='font-size:2.8rem'>"+
+days+
+"</div>"+
+
+"<div>Days Until OBX</div>"+
+
+"<div style='margin-top:10px'>"+
+hours+"h "+
+minutes+"m "+
+seconds+"s"+
 "</div>";
 
 }
+
+
 
 updateCountdown();
 
 setInterval(updateCountdown,1000);
 
+
 </script>
+
 
 </body>
 
