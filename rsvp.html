@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -10,276 +10,53 @@
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-
-
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-font-family:Inter,Arial,sans-serif;
-}
-
-
 body{
-
-background:
-linear-gradient(
-180deg,
-#082f49,
-#0284c7
-);
-
-min-height:100vh;
-
-color:#0f172a;
-
-padding:25px 18px;
-
-}
-
-
-
-.container{
-
-max-width:500px;
-
-margin:auto;
-
-padding-top:30px;
-
-}
-
-
-
-.logo{
-
-text-align:center;
-
+font-family:Arial,sans-serif;
+background:#06243d;
 color:white;
-
-font-size:1.2rem;
-
-font-weight:900;
-
-margin-bottom:25px;
-
-}
-
-
-
-.card{
-
-background:white;
-
-border-radius:30px;
-
 padding:25px;
-
-box-shadow:
-0 20px 50px rgba(0,0,0,.25);
-
 }
 
-
+.box{
+background:white;
+color:#111;
+border-radius:20px;
+padding:25px;
+max-width:500px;
+margin:auto;
+}
 
 h1{
-
 text-align:center;
-
-font-size:2.2rem;
-
-font-weight:900;
-
-margin-bottom:10px;
-
 }
 
-
-
-.subtitle{
-
-text-align:center;
-
-color:#475569;
-
-margin-bottom:30px;
-
-line-height:1.5;
-
-}
-
-
-
-.choice{
-
-display:block;
-
+input, select{
 width:100%;
-
-padding:20px;
-
-border-radius:25px;
-
-border:none;
-
-margin:15px 0;
-
-font-size:1.2rem;
-
-font-weight:900;
-
-cursor:pointer;
-
+padding:14px;
+margin:8px 0;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:16px;
 }
 
-
+button{
+width:100%;
+padding:16px;
+margin-top:12px;
+border:none;
+border-radius:15px;
+font-size:18px;
+font-weight:bold;
+}
 
 .yes{
-
-background:#22c55e;
-
+background:#0284c7;
 color:white;
-
 }
-
 
 .no{
-
-background:#ef4444;
-
-color:white;
-
+background:#ddd;
 }
-
-
-
-.hidden{
-
-display:none;
-
-}
-
-
-
-label{
-
-display:block;
-
-font-weight:800;
-
-margin-top:18px;
-
-margin-bottom:8px;
-
-}
-
-
-
-input, textarea{
-
-width:100%;
-
-padding:15px;
-
-border-radius:15px;
-
-border:2px solid #e2e8f0;
-
-font-size:1rem;
-
-}
-
-
-
-.counter{
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-background:#e0f2fe;
-
-padding:15px;
-
-border-radius:20px;
-
-margin-top:10px;
-
-}
-
-
-
-.counter button{
-
-width:45px;
-
-height:45px;
-
-border:none;
-
-border-radius:50%;
-
-background:#0284c7;
-
-color:white;
-
-font-size:1.5rem;
-
-font-weight:900;
-
-}
-
-
-
-.number{
-
-font-size:1.5rem;
-
-font-weight:900;
-
-}
-
-
-
-.submit{
-
-margin-top:25px;
-
-width:100%;
-
-padding:18px;
-
-border:none;
-
-border-radius:30px;
-
-background:#082f49;
-
-color:white;
-
-font-size:1.1rem;
-
-font-weight:900;
-
-}
-
-
-
-.message{
-
-text-align:center;
-
-padding:20px;
-
-font-size:1.2rem;
-
-font-weight:800;
-
-}
-
 
 
 </style>
@@ -290,160 +67,48 @@ font-weight:800;
 <body>
 
 
-<div class="container">
-
-
-<div class="logo">
-🌊 OPERATION OBX 2027
-
-<br>
-
-<a href="index.html" style="
-color:white;
-font-size:.9rem;
-text-decoration:none;
-">
-← Back to Command Center
-</a>
-
-</div>
-
-
-<div class="card">
+<div class="box">
 
 
 <h1>
-RSVP
+🔥 RSVP
 </h1>
 
 
-<p class="subtitle">
-The most important question of the year:
-Are you joining the Outer Banks invasion?
-</p>
+<button class="yes" onclick="showForm()">
+😎 Hell Yes, I'm In
+</button>
 
 
-
-<div id="start">
-
-
-<button class="choice yes" onclick="showForm()">
-
-🔥 HELL YES, I'M IN
-
+<button class="no" onclick="window.location.href='index.html'">
+😢 No, I'm a Loser
 </button>
 
 
 
-<button class="choice no" onclick="showNo()">
-
-😢 NO, I'M A LOSER
-
-</button>
+<div id="form" style="display:none;">
 
 
-</div>
+<input id="name" placeholder="Your Name">
 
 
+<input id="adults" type="number" placeholder="Number of Adults">
 
 
-
-<div id="form" class="hidden">
-
-
-<label>
-Who are you?
-</label>
+<input id="kids" type="number" placeholder="Number of Kids">
 
 
-<input id="name" placeholder="Your name">
+<input id="ages" placeholder="Kids Ages (optional)">
 
 
 
-<label>
-How many adults?
-</label>
+<button class="yes" onclick="saveRSVP()">
 
-
-<div class="counter">
-
-<button onclick="changeAdult(-1)">−</button>
-
-<div class="number" id="adults">
-1
-</div>
-
-<button onclick="changeAdult(1)">+</button>
-
-</div>
-
-
-
-
-
-<label>
-How many kids?
-</label>
-
-
-<div class="counter">
-
-<button onclick="changeKids(-1)">−</button>
-
-<div class="number" id="kids">
-0
-</div>
-
-<button onclick="changeKids(1)">+</button>
-
-</div>
-
-
-
-
-
-<label>
-Kids ages (optional)
-</label>
-
-
-<input id="ages" placeholder="Example: 5, 8, 12">
-
-
-
-
-
-<label>
-Message (optional)
-</label>
-
-
-<textarea id="message" rows="4"
-placeholder="Can't wait! Bringing cornhole!"></textarea>
-
-
-
-
-<button class="submit" onclick="submitRSVP()">
-
-SAVE MY RSVP
+Submit RSVP
 
 </button>
 
 
-
-</div>
-
-
-
-
-
-<div id="result" class="message hidden">
-
-</div>
-
-
-
 </div>
 
 
@@ -452,134 +117,77 @@ SAVE MY RSVP
 
 
 
-
-<script>
-
-
-let adults=1;
-
-let kids=0;
+<script type="module">
 
 
+import { initializeApp } from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-function showForm(){
 
-document.getElementById("start").style.display="none";
-
-document.getElementById("form").classList.remove("hidden");
-
-}
+import { getFirestore, collection, addDoc } from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 
-function showNo(){
+const firebaseConfig = {
 
-document.getElementById("start").innerHTML=
+apiKey: "AIzaSyAmdsdhHQagqHIbhtY1JhEmsvpNBtGcYKo",
 
-`
-Your beach chair will remain empty.
+authDomain: "obx2027-5a536.firebaseapp.com",
 
-<br><br>
+projectId: "obx2027-5a536",
 
-<a href="index.html" style="
-display:block;
-background:#082f49;
-color:white;
-padding:15px;
-border-radius:25px;
-text-decoration:none;
-margin-top:20px;
-">
-← Return to Command Center
-</a>
+storageBucket: "obx2027-5a536.firebasestorage.app",
 
-</div>
-`;
-}
+messagingSenderId: "1003642407899",
+
+appId: "1:1003642407899:web:2961f1f362189db10db5fe"
+
+};
 
 
 
+const app = initializeApp(firebaseConfig);
 
-function changeAdult(amount){
+const db = getFirestore(app);
 
-adults+=amount;
 
-if(adults<0) adults=0;
 
-document.getElementById("adults").innerHTML=adults;
+window.showForm=function(){
+
+document.getElementById("form").style.display="block";
 
 }
 
 
 
-function changeKids(amount){
+window.saveRSVP=async function(){
 
-kids+=amount;
 
-if(kids<0) kids=0;
+await addDoc(collection(db,"rsvps"),{
 
-document.getElementById("kids").innerHTML=kids;
+name:document.getElementById("name").value,
+
+adults:Number(document.getElementById("adults").value),
+
+kids:Number(document.getElementById("kids").value),
+
+kidsAges:document.getElementById("ages").value,
+
+attending:true,
+
+date:new Date()
+
+});
+
+
+alert("RSVP Saved!");
+
+
+window.location.href="index.html";
+
 
 }
-
-
-
-
-function submitRSVP(){
-
-
-let name=document.getElementById("name").value;
-
-
-if(!name){
-
-alert("Tell us who you are first!");
-
-return;
-
-}
-
-
-
-document.getElementById("form").innerHTML=
-
-`
-
-<div class="message">
-
-🔥 YOU'RE IN! 🔥
-
-<br><br>
-
-${name}<br>
-
-Adults: ${adults}<br>
-
-Kids: ${kids}
-
-<br><br>
-
-OBX 2027 officially has another crew member.
-
-<br><br>
-
-<a href="index.html" style="
-display:block;
-background:#082f49;
-color:white;
-padding:15px;
-border-radius:25px;
-text-decoration:none;
-margin-top:20px;
-">
-← Return to Command Center
-</a>
-
-</div>
-
-`;
-}
-
 
 
 </script>
