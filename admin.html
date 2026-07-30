@@ -225,7 +225,7 @@ ${r.approved ? "✅ YES" : "❌ NO"}
 <div class="date">
 
 Submitted:
-${r.created ? new Date(r.created).toLocaleString() : "Unknown"}
+${r.created ? r.created.toDate().toLocaleString() : "Unknown"}
 
 </div>
 
