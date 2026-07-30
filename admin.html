@@ -1,1 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OBX Admin</title>
+
+
+<style>
+
+body{
+
+font-family:Arial,sans-serif;
+
+background:#06243d;
+
+color:white;
+
+padding:20px;
+
+}
+
+
+.card{
+
+background:white;
+
+color:#111;
+
+max-width:700px;
+
+margin:20px auto;
+
+padding:25px;
+
+border-radius:20px;
+
+}
+
+
+h1,h2{
+
+text-align:center;
+
+}
+
+
+.rsvp,
+.message{
+
+border:2px solid #0284c7;
+
+padding:15px;
+
+border-radius:15px;
+
+margin-top:15px;
+
+}
+
+
+.name{
+
+font-size:1.3rem;
+
+font-weight:bold;
+
+color:#0284c7;
+
+}
+
+
+button{
+
+width:100%;
+
+padding:12px;
+
+margin-top:8px;
+
+border:0;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+.approve{
+
+background:#16a34a;
+
+color:white;
+
+}
+
+
+.delete{
+
+background:#dc2626;
+
+color:white;
+
+}
+
+
+.edit{
+
+background:#f59e0b;
+
+color:white;
+
+}
+
+
+.save{
+
+background:#0284c7;
+
+color:white;
+
+}
+
+
+.status{
+
+margin-top:10px;
+
+font-weight:bold;
+
+}
+
+
+input,textarea{
+
+width:100%;
+
+padding:12px;
+
+border-radius:10px;
+
+border:1px solid #ccc;
+
+box-sizing:border-box;
+
+font-size:16px;
+
+}
+
+
+textarea{
+
+height:100px;
+
+}
+
+
+hr{
+
+margin:40px 0;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<h1>
+🔥 OBX 2027 Admin
+</h1>
+
+
+
+<div class="card">
+
+<h2>
+👥 RSVPs
+</h2>
+
+
+<div id="rsvpList">
+
+Loading RSVPs...
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2>
+💬 Messages
+</h2>
+
+
+<div id="messageList">
+
+Loading Messages...
+
+</div>
+
+
+</div><script type="module">
+
+
+import { initializeApp } from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import { 
+
+getFirestore,
+
+collection,
+
+getDocs,
+
+doc,
+
+updateDoc,
+
+deleteDoc,
+
+query,
+
+orderBy
+
+} from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAmdsdhHQagqHIbhtY1JhEmsvpNBtGcYKo",
+
+authDomain: "obx2027-5a536.firebaseapp.com",
+
+projectId: "obx2027-5a536",
+
+storageBucket: "obx2027-5a536.firebasestorage.app",
+
+messagingSenderId: "1003642407899",
+
+appId: "1:1003642407899:web:2961f1f362189db10db5fe"
+
+};
+
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+
+
+// LOAD RSVPS
+
+
+async function loadRSVPs(){
+
+
+const snapshot = await getDocs(collection(db,"rsvps"));
+
+
+let html="";
+
+
+
+snapshot.forEach((item)=>{
+
+
+const r=item.data();
+
+
+let name=r.adultNames || r.name || "No Name";
+
+
+
+html += `
+
+
+<div class="rsvp">
+
+
+<div class="name">
+
+🔥 ${name}
+
+</div>
+
+
+<br>
+
+
+Adults: ${r.adults || 0}
+
+<br>
+
+Kids: ${r.kids || 0}
+
+<br>
+
+Kids Ages: ${r.kidsAges || "none"}
+
+
+<div class="status">
+
+${r.approved ? "✅ Approved" : "🟡 Waiting"}
+
+</div>
+
+
+
+<button class="approve"
+
+onclick="approveRSVP('${item.id}')">
+
+${r.approved ? "↩️ Unapprove" : "✅ Approve"}
+
+</button>
+
+
+
+<button class="delete"
+
+onclick="deleteRSVP('${item.id}')">
+
+🗑 Delete RSVP
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+});
+
+
+
+document.getElementById("rsvpList").innerHTML =
+
+html || "No RSVPs";
+
+
+}
+
+
+
+
+window.approveRSVP = async function(id){
+
+
+const ref=doc(db,"rsvps",id);
+
+
+const snap = await getDocs(collection(db,"rsvps"));
+
+
+
+for(const x of snap){
+
+
+if(x.id===id){
+
+
+await updateDoc(ref,{
+
+approved: !x.data().approved
+
+});
+
+
+break;
+
+}
+
+
+}
+
+
+
+loadRSVPs();
+
+
+}
+
+
+
+
+
+window.deleteRSVP = async function(id){
+
+
+await deleteDoc(doc(db,"rsvps",id));
+
+
+loadRSVPs();
+
+
+}
+
+
+// LOAD MESSAGES
+
+
+async function loadMessages(){
+
+
+const q = query(
+
+collection(db,"messages"),
+
+orderBy("created","desc")
+
+);
+
+
+
+const snapshot = await getDocs(q);
+
+
+let html="";
+
+
+
+snapshot.forEach((item)=>{
+
+
+const m=item.data();
+
+
+
+html += `
+
+
+<div class="message">
+
+
+<b>${m.name || "Unknown"}</b>
+
+
+<br><br>
+
+
+<div id="text-${item.id}">
+
+${m.message}
+
+</div>
+
+
+
+<br>
+
+
+<button class="edit"
+
+onclick="editMessage('${item.id}','${m.message.replace(/'/g,"\\'")}')">
+
+✏️ Edit
+
+</button>
+
+
+
+<button class="delete"
+
+onclick="deleteMessage('${item.id}')">
+
+🗑 Delete
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+
+document.getElementById("messageList").innerHTML =
+
+html || "No messages yet.";
+
+
+}
+
+
+
+
+window.deleteMessage = async function(id){
+
+
+await deleteDoc(doc(db,"messages",id));
+
+
+loadMessages();
+
+
+}
+
+
+
+
+window.editMessage = async function(id,current){
+
+
+const newText = prompt(
+
+"Edit message:",
+
+current
+
+);
+
+
+
+if(!newText){
+
+return;
+
+}
+
+
+
+await updateDoc(
+
+doc(db,"messages",id),
+
+{
+
+message:newText
+
+}
+
+);
+
+
+
+loadMessages();
+
+
+}
+
+
+
+
+loadRSVPs();
+
+loadMessages();
+
+
+
+</script>
+
+
+</body>
+
+</html>
