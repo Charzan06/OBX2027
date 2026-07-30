@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>OBX 2027 Admin RSVP</title>
+<title>OBX Admin RSVP</title>
 
 <style>
 
@@ -22,7 +22,7 @@ text-align:center;
 }
 
 .stats{
-max-width:600px;
+max-width:650px;
 margin:20px auto;
 background:#0ea5e9;
 padding:20px;
@@ -34,11 +34,10 @@ font-weight:bold;
 .card{
 background:white;
 color:#111;
-max-width:600px;
+max-width:650px;
 margin:20px auto;
 padding:25px;
 border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
 .rsvp{
@@ -49,7 +48,7 @@ margin-top:15px;
 }
 
 .name{
-font-size:1.3rem;
+font-size:1.35rem;
 font-weight:bold;
 color:#0284c7;
 }
@@ -57,6 +56,17 @@ color:#0284c7;
 .date{
 font-size:.9rem;
 color:#64748b;
+margin-top:8px;
+}
+
+.statusApproved{
+color:#16a34a;
+font-weight:bold;
+}
+
+.statusWaiting{
+color:#ca8a04;
+font-weight:bold;
 }
 
 button{
@@ -65,12 +75,18 @@ border:none;
 border-radius:12px;
 font-weight:bold;
 margin-top:10px;
+margin-right:8px;
 cursor:pointer;
 }
 
 .approve{
 background:#16a34a;
 color:white;
+}
+
+.unapprove{
+background:#eab308;
+color:black;
 }
 
 .delete{
@@ -82,31 +98,23 @@ color:white;
 
 </head>
 
-
 <body>
 
-
-<h1>
-🔥 OBX 2027 RSVP Admin
-</h1>
-
+<h1>🔥 OBX 2027 RSVP Admin</h1>
 
 <div class="stats" id="stats">
 Loading totals...
 </div>
 
-
 <div class="card">
 
 <div id="list">
+
 Loading RSVPs...
-</div>
 
 </div>
 
-
-
-<script type="module">
+</div><script type="module">
 
 
 import { initializeApp } from 
@@ -142,6 +150,7 @@ appId: "1:1003642407899:web:2961f1f362189db10db5fe"
 };
 
 
+
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
@@ -149,6 +158,7 @@ const db = getFirestore(app);
 
 
 async function loadRSVPs(){
+
 
 const snapshot = await getDocs(collection(db,"rsvps"));
 
@@ -159,8 +169,11 @@ let people=[];
 snapshot.forEach((item)=>{
 
 people.push({
+
 id:item.id,
+
 ...item.data()
+
 });
 
 });
@@ -168,20 +181,31 @@ id:item.id,
 
 // newest first
 
-people.sort((a,b)=>
-new Date(b.created || 0) - new Date(a.created || 0)
-);
+people.sort((a,b)=>{
+
+let dateA = a.created?.toDate ? a.created.toDate() : new Date(0);
+
+let dateB = b.created?.toDate ? b.created.toDate() : new Date(0);
+
+return dateB-dateA;
+
+});
 
 
 
 let html="";
+
 
 let adults=0;
 
 let kids=0;
 
 
+
 people.forEach((r)=>{
+
+
+const displayName = r.adultNames || r.name || "No Name";
 
 
 adults += Number(r.adults || 0);
@@ -189,19 +213,33 @@ adults += Number(r.adults || 0);
 kids += Number(r.kids || 0);
 
 
+
+let submitted="Unknown";
+
+
+if(r.created?.toDate){
+
+submitted = r.created.toDate().toLocaleString();
+
+}
+
+
+
 html += `
+
 
 <div class="rsvp">
 
 
 <div class="name">
 
-🔥 ${r.name || "No Name"}
+🔥 ${displayName}
 
 </div>
 
 
 <br>
+
 
 Adults: ${r.adults || 0}
 
@@ -213,49 +251,74 @@ Kids: ${r.kids || 0}
 
 Kids Ages: ${r.kidsAges || "none"}
 
-<br><br>
-
-Approved:
-
-${r.approved ? "✅ YES" : "❌ NO"}
-
 
 <br><br>
+
+
+<div class="${r.approved ? "statusApproved":"statusWaiting"}">
+
+${r.approved ? "✅ Approved" : "🟡 Waiting Approval"}
+
+</div>
+
+
 
 <div class="date">
 
-Submitted:
-${r.created ? r.created.toDate().toLocaleString() : "Unknown"}
+Submitted: ${submitted}
 
 </div>
+
 
 
 <br>
 
 
-<button class="approve" onclick="approve('${r.id}')">
+<button class="approve"
+
+onclick="approve('${r.id}')">
 
 ✅ Approve
 
 </button>
 
 
-<button class="delete" onclick="removeRSVP('${r.id}')">
+
+<button class="unapprove"
+
+onclick="unapprove('${r.id}')">
+
+↩️ Unapprove
+
+</button>
+
+
+
+<button class="delete"
+
+onclick="removeRSVP('${r.id}')">
 
 🗑 Delete
 
 </button>
 
 
+
 </div>
 
+
 `;
+
+
 
 });
 
 
+
 document.getElementById("list").innerHTML =
+
 html || "No RSVPs yet.";
+
 
 
 document.getElementById("stats").innerHTML =
@@ -266,7 +329,7 @@ document.getElementById("stats").innerHTML =
 
 "<br>Kids: " + kids +
 
-"<br>Total People: " + (adults+kids);
+"<br>Total People: " + (adults + kids);
 
 
 
@@ -276,13 +339,33 @@ document.getElementById("stats").innerHTML =
 
 window.approve = async function(id){
 
+
 await updateDoc(doc(db,"rsvps",id),{
 
 approved:true
 
 });
 
+
 loadRSVPs();
+
+
+}
+
+
+
+window.unapprove = async function(id){
+
+
+await updateDoc(doc(db,"rsvps",id),{
+
+approved:false
+
+});
+
+
+loadRSVPs();
+
 
 }
 
@@ -290,9 +373,12 @@ loadRSVPs();
 
 window.removeRSVP = async function(id){
 
+
 await deleteDoc(doc(db,"rsvps",id));
 
+
 loadRSVPs();
+
 
 }
 
