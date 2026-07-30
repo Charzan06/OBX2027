@@ -103,7 +103,7 @@ Operation OBX 2027
 
 <div id="form">
 
-<input id="name" placeholder="Your Name">
+<input id="adultNames" placeholder="Adult Names (Example: Joe & Sue)">
 
 <input id="adults" type="number" placeholder="Number of Adults">
 
@@ -175,7 +175,7 @@ try{
 
 await addDoc(collection(db,"rsvps"),{
 
-name: document.getElementById("name").value,
+name: document.getElementById("adultNames").value,
 
 adults: Number(document.getElementById("adults").value || 0),
 
