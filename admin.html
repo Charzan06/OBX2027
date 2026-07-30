@@ -21,6 +21,16 @@ h1{
 text-align:center;
 }
 
+.stats{
+max-width:600px;
+margin:20px auto;
+background:#0ea5e9;
+padding:20px;
+border-radius:20px;
+font-size:1.1rem;
+font-weight:bold;
+}
+
 .card{
 background:white;
 color:#111;
@@ -44,6 +54,11 @@ font-weight:bold;
 color:#0284c7;
 }
 
+.date{
+font-size:.9rem;
+color:#64748b;
+}
+
 button{
 padding:12px;
 border:none;
@@ -63,11 +78,6 @@ background:#dc2626;
 color:white;
 }
 
-#error{
-color:red;
-font-weight:bold;
-}
-
 </style>
 
 </head>
@@ -81,13 +91,16 @@ font-weight:bold;
 </h1>
 
 
+<div class="stats" id="stats">
+Loading totals...
+</div>
+
+
 <div class="card">
 
 <div id="list">
 Loading RSVPs...
 </div>
-
-<div id="error"></div>
 
 </div>
 
@@ -129,7 +142,6 @@ appId: "1:1003642407899:web:2961f1f362189db10db5fe"
 };
 
 
-
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
@@ -138,35 +150,56 @@ const db = getFirestore(app);
 
 async function loadRSVPs(){
 
-try{
+const snapshot = await getDocs(collection(db,"rsvps"));
 
 
-const querySnapshot = await getDocs(collection(db,"rsvps"));
+let people=[];
 
 
-let html = "";
+snapshot.forEach((item)=>{
+
+people.push({
+id:item.id,
+...item.data()
+});
+
+});
 
 
-if(querySnapshot.empty){
+// newest first
 
-html = "No RSVPs found.";
-
-}
-
-
-querySnapshot.forEach((item)=>{
+people.sort((a,b)=>
+new Date(b.created || 0) - new Date(a.created || 0)
+);
 
 
-const r = item.data();
+
+let html="";
+
+let adults=0;
+
+let kids=0;
+
+
+people.forEach((r)=>{
+
+
+adults += Number(r.adults || 0);
+
+kids += Number(r.kids || 0);
 
 
 html += `
 
 <div class="rsvp">
 
+
 <div class="name">
+
 🔥 ${r.name || "No Name"}
+
 </div>
+
 
 <br>
 
@@ -183,18 +216,34 @@ Kids Ages: ${r.kidsAges || "none"}
 <br><br>
 
 Approved:
-${r.approved ? "YES ✅" : "NO ❌"}
+
+${r.approved ? "✅ YES" : "❌ NO"}
+
+
+<br><br>
+
+<div class="date">
+
+Submitted:
+${r.created ? new Date(r.created).toLocaleString() : "Unknown"}
+
+</div>
+
 
 <br>
 
 
-<button class="approve" onclick="approve('${item.id}')">
+<button class="approve" onclick="approve('${r.id}')">
+
 ✅ Approve
+
 </button>
 
 
-<button class="delete" onclick="removeRSVP('${item.id}')">
+<button class="delete" onclick="removeRSVP('${r.id}')">
+
 🗑 Delete
+
 </button>
 
 
@@ -205,22 +254,20 @@ ${r.approved ? "YES ✅" : "NO ❌"}
 });
 
 
-document.getElementById("list").innerHTML = html;
-
-
-}
-
-catch(error){
-
 document.getElementById("list").innerHTML =
-"Firebase Error";
+html || "No RSVPs yet.";
 
-document.getElementById("error").innerHTML =
-error.message;
 
-console.log(error);
+document.getElementById("stats").innerHTML =
 
-}
+"RSVPs: " + people.length +
+
+"<br>Adults: " + adults +
+
+"<br>Kids: " + kids +
+
+"<br>Total People: " + (adults+kids);
+
 
 
 }
