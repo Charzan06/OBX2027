@@ -129,10 +129,11 @@ Submit RSVP
 
 <script type="module">
 
+import { initializeApp } from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, addDoc } from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 const firebaseConfig = {
@@ -157,8 +158,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
-
-window.startRSVP=function(){
+window.startRSVP = function(){
 
 document.getElementById("start").style.display="none";
 
@@ -168,13 +168,12 @@ document.getElementById("form").style.display="block";
 
 
 
-window.saveRSVP=async function(){
-
+window.saveRSVP = async function(){
 
 try{
 
 
-const doc = await addDoc(collection(db,"rsvps"),{
+await addDoc(collection(db,"rsvps"),{
 
 name: document.getElementById("name").value,
 
@@ -194,21 +193,24 @@ created:new Date()
 
 
 document.getElementById("status").innerHTML =
-"🔥 SAVED!<br><br>ID:<br>" + doc.id;
+"🔥 RSVP SAVED!<br><br>Sending you back...";
+
+
+setTimeout(function(){
+
+window.location.href="index.html";
+
+},3000);
 
 
 }
 
-
-catch(e){
-
+catch(error){
 
 document.getElementById("status").innerHTML =
-"ERROR:<br>" + e.message;
+"ERROR: " + error.message;
 
-
-console.log(e);
-
+console.log(error);
 
 }
 
