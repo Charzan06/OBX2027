@@ -1,1 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OBX Admin RSVP</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#082f49;
+color:white;
+padding:20px;
+}
+
+.card{
+background:white;
+color:#111;
+max-width:600px;
+margin:20px auto;
+padding:25px;
+border-radius:20px;
+}
+
+h1{
+text-align:center;
+}
+
+.rsvp{
+border:2px solid #0284c7;
+padding:15px;
+border-radius:15px;
+margin-top:15px;
+}
+
+.name{
+font-size:1.3rem;
+font-weight:bold;
+color:#0284c7;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1>
+🔥 OBX 2027 RSVP Admin
+</h1>
+
+
+<div class="card">
+
+<div id="list">
+
+Loading RSVPs...
+
+</div>
+
+</div>
+
+
+
+<script type="module">
+
+
+import { initializeApp } from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import { 
+getFirestore,
+collection,
+getDocs
+} from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAmdsdhHQagqHIbhtY1JhEmsvpNBtGcYKo",
+
+authDomain: "obx2027-5a536.firebaseapp.com",
+
+projectId: "obx2027-5a536",
+
+storageBucket: "obx2027-5a536.firebasestorage.app",
+
+messagingSenderId: "1003642407899",
+
+appId: "1:1003642407899:web:2961f1f362189db10db5fe"
+
+};
+
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+
+const querySnapshot = await getDocs(collection(db,"rsvps"));
+
+
+let html="";
+
+
+querySnapshot.forEach((doc)=>{
+
+
+const r = doc.data();
+
+
+html += `
+
+<div class="rsvp">
+
+<div class="name">
+🔥 ${r.name || "No Name"}
+</div>
+
+<br>
+
+Adults: ${r.adults || 0}
+
+<br>
+
+Kids: ${r.kids || 0}
+
+<br>
+
+Kids Ages: ${r.kidsAges || "none"}
+
+<br><br>
+
+Approved:
+${r.approved ? "YES ✅" : "NO ❌"}
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById("list").innerHTML = html || "No RSVPs yet.";
+
+
+</script>
+
+
+</body>
+
+</html>
