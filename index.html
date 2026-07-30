@@ -14,21 +14,16 @@
 
 <style>
 
-
 *{
-
 margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Inter',sans-serif;
-
 }
 
 
 html{
-
 scroll-behavior:smooth;
-
 }
 
 
@@ -66,6 +61,7 @@ z-index:-2;
 }
 
 
+
 .hero{
 
 min-height:100vh;
@@ -83,6 +79,7 @@ text-align:center;
 }
 
 
+
 .hero-content{
 
 width:100%;
@@ -98,6 +95,7 @@ align-items:center;
 }
 
 
+
 .mainButtons{
 
 width:100%;
@@ -109,6 +107,7 @@ flex-direction:column;
 gap:14px;
 
 }
+
 
 
 .bigButton{
@@ -132,6 +131,7 @@ backdrop-filter:blur(8px);
 }
 
 
+
 .rsvp{
 
 background:rgba(14,165,233,.9);
@@ -139,6 +139,7 @@ background:rgba(14,165,233,.9);
 color:white;
 
 }
+
 
 
 .house{
@@ -150,6 +151,7 @@ color:#082f49;
 }
 
 
+
 .food{
 
 background:rgba(250,204,21,.9);
@@ -159,6 +161,7 @@ color:#111827;
 }
 
 
+
 section{
 
 padding:45px 18px;
@@ -166,6 +169,7 @@ padding:45px 18px;
 background:transparent;
 
 }
+
 
 
 .glass{
@@ -185,6 +189,7 @@ margin-bottom:20px;
 }
 
 
+
 .sectionTitle{
 
 font-size:2rem;
@@ -198,6 +203,7 @@ margin-bottom:12px;
 }
 
 
+
 .sectionSub{
 
 text-align:center;
@@ -207,6 +213,7 @@ margin-bottom:25px;
 opacity:.9;
 
 }
+
 
 
 .card{
@@ -224,6 +231,7 @@ margin-bottom:18px;
 }
 
 
+
 .card h3{
 
 color:#0284c7;
@@ -233,11 +241,13 @@ margin-bottom:10px;
 }
 
 
+
 .card p{
 
 line-height:1.6;
 
 }
+
 
 
 @media(min-width:768px){
@@ -249,6 +259,7 @@ flex-direction:row;
 max-width:850px;
 
 }
+
 
 .bigButton{
 
@@ -265,7 +276,10 @@ flex:1;
 </head>
 
 
-<body><section class="hero">
+<body>
+
+
+<section class="hero">
 
 
 <div class="hero-content">
@@ -329,7 +343,6 @@ Everything you need before the invasion.
 </div>
 
 
-
 <div class="card">
 
 
@@ -374,7 +387,6 @@ href="https://www.carolinadesigns.com/kill-devil-hills-vacation-rental/365-ocean
 </div>
 
 
-
 <div class="card">
 
 
@@ -395,20 +407,13 @@ A week of beach days, pool time, food, laughs, and making memories.
 </div>
 
 
-
 </div>
 
-</section>
-
-
-
-<!-- WHO'S COMING SECTION -->
+</section><!-- WHO'S COMING -->
 
 <section>
 
-
 <div class="glass">
-
 
 <div class="sectionTitle">
 
@@ -424,9 +429,7 @@ The official OBX 2027 crew list.
 </div>
 
 
-
 <div class="card">
-
 
 <div id="comingList">
 
@@ -434,24 +437,21 @@ Loading crew...
 
 </div>
 
-
 </div>
 
 
 </div>
-
 
 </section>
 
 
 
 
+<!-- FOOD -->
 
 <section id="food">
 
-
 <div class="glass">
-
 
 <div class="sectionTitle">
 
@@ -467,9 +467,7 @@ Nobody wants a vacation grocery-store argument.
 </div>
 
 
-
 <div class="card">
-
 
 <h3>
 👨‍🍳 Private Chef
@@ -491,10 +489,8 @@ Menus, allergies, preferences, and schedules will be added as plans are finalize
 
 <div class="card">
 
-
 <h3>
 ☕ Coffee Operations
-
 </h3>
 
 
@@ -512,80 +508,18 @@ If you finish the pot, start another one.
 
 </div>
 
-
-</section><section>
-
-
-<div class="glass">
-
-
-<div class="sectionTitle">
-
-💬 Family Message Board
-
-</div>
-
-
-<div class="sectionSub">
-
-Questions, updates, jokes, and trip planning.
-
-</div>
+</section>
 
 
 
-<div class="card">
 
-
-<textarea
-
-placeholder="Write a message..."
-
-style="
-width:100%;
-height:130px;
-padding:15px;
-border-radius:15px;
-border:none;
-font-size:16px;
-resize:none;
-"
-
-></textarea>
-
-
-<br><br>
-
-
-<button
-
-style="
-width:100%;
-padding:16px;
-border:none;
-border-radius:15px;
-background:#0284c7;
-color:white;
-font-size:18px;
-font-weight:900;
-"
-
->
-
-POST MESSAGE
-
-</button>
-
-
-</div>
-
-
-
+<!-- MESSAGE BOARD -->
 
 <section>
 
 <div class="glass">
 
+
 <div class="sectionTitle">
 
 💬 Family Message Board
@@ -598,6 +532,7 @@ POST MESSAGE
 Questions, updates, jokes, and trip planning.
 
 </div>
+
 
 
 <div class="card">
@@ -665,6 +600,7 @@ POST MESSAGE
 
 
 
+
 <div class="card">
 
 
@@ -685,6 +621,7 @@ Loading messages...
 </div>
 
 
+
 </div>
 
 </section>
@@ -692,6 +629,8 @@ Loading messages...
 
 
 
+
+<!-- FAQ -->
 
 <section>
 
@@ -733,7 +672,6 @@ August 7–14, 2027
 
 
 
-
 <div class="card">
 
 
@@ -745,12 +683,14 @@ August 7–14, 2027
 <p>
 
 Kill Devil Hills<br>
+
 Outer Banks, North Carolina
 
 </p>
 
 
 </div>
+
 
 
 
@@ -765,9 +705,13 @@ Outer Banks, North Carolina
 <p>
 
 Beach gear<br>
+
 Sunscreen<br>
+
 Swimsuits<br>
+
 Personal items<br>
+
 Your favorite vacation stuff
 
 </p>
@@ -776,15 +720,10 @@ Your favorite vacation stuff
 </div>
 
 
-
 </div>
 
 
-</section>
-
-
-
-<footer style="
+</section><footer style="
 padding:60px 18px 40px;
 text-align:center;
 ">
@@ -803,7 +742,6 @@ margin-bottom:15px;
 </h2>
 
 
-
 <p style="
 line-height:1.7;
 ">
@@ -819,9 +757,7 @@ A lifetime of stories.
 </p>
 
 
-
 <br>
-
 
 
 <p style="opacity:.85;">
@@ -833,9 +769,7 @@ Kill Devil Hills, NC
 </p>
 
 
-
 <br>
-
 
 
 <p style="
@@ -848,7 +782,6 @@ Family Vacation InfoHub
 </p>
 
 
-
 </div>
 
 
@@ -856,19 +789,26 @@ Family Vacation InfoHub
 
 
 
+
 <script type="module">
+
 
 import { initializeApp } from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import { 
 getFirestore,
 collection,
 getDocs,
 query,
-where
+where,
+addDoc,
+orderBy,
+serverTimestamp
 } from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 
 
 const firebaseConfig = {
@@ -888,15 +828,19 @@ appId: "1:1003642407899:web:2961f1f362189db10db5fe"
 };
 
 
+
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
 
 
-async function loadComing(){
 
-try{
+
+// WHO'S COMING
+
+
+async function loadComing(){
 
 
 const q = query(
@@ -908,18 +852,16 @@ where("approved","==",true)
 );
 
 
-
 const snapshot = await getDocs(q);
 
 
-let html = "";
-
+let html="";
 
 
 snapshot.forEach((item)=>{
 
 
-const r = item.data();
+const r=item.data();
 
 
 let displayName = r.adultNames || r.name || "Family";
@@ -937,7 +879,7 @@ html += `
 
 <div style="margin-bottom:20px;">
 
-<b>🔥 ${displayName}</b>
+<b>${displayName}</b>
 
 </div>
 
@@ -956,18 +898,116 @@ html || "Nobody has been approved yet 😢";
 
 }
 
-catch(error){
 
 
-console.log(error);
+
+// POST MESSAGE
 
 
-document.getElementById("comingList").innerHTML =
+window.postMessage = async function(){
 
-"Error loading crew";
+
+const name =
+document.getElementById("messageName").value;
+
+
+const message =
+document.getElementById("messageText").value;
+
+
+
+if(!name || !message){
+
+alert("Enter your name and message");
+
+return;
+
+}
+
+
+
+await addDoc(collection(db,"messages"),{
+
+
+name:name,
+
+message:message,
+
+created:serverTimestamp()
+
+
+});
+
+
+
+document.getElementById("messageName").value="";
+
+document.getElementById("messageText").value="";
+
+
+loadMessages();
 
 
 }
+
+
+
+
+// LOAD MESSAGES
+
+
+async function loadMessages(){
+
+
+const q=query(
+
+collection(db,"messages"),
+
+orderBy("created","desc")
+
+);
+
+
+
+const snapshot=await getDocs(q);
+
+
+let html="";
+
+
+
+snapshot.forEach((item)=>{
+
+
+const m=item.data();
+
+
+
+html += `
+
+<div style="margin-bottom:20px;">
+
+<b>${m.name}</b>
+
+<br>
+
+${m.message}
+
+</div>
+
+<hr>
+
+`;
+
+
+
+});
+
+
+
+document.getElementById("messageList").innerHTML =
+
+html || "No messages yet. Be the first!";
 
 
 }
@@ -976,9 +1016,11 @@ document.getElementById("comingList").innerHTML =
 
 loadComing();
 
+loadMessages();
+
+
 
 </script>
-
 
 
 </body>
