@@ -43,8 +43,6 @@ overflow-x:hidden;
 }
 
 
-/* PERMANENT BACKGROUND */
-
 body::before{
 
 content:"";
@@ -67,8 +65,6 @@ z-index:-2;
 
 }
 
-
-/* HERO SPLASH */
 
 .hero{
 
@@ -101,8 +97,6 @@ align-items:center;
 
 }
 
-
-/* BUTTONS */
 
 .mainButtons{
 
@@ -164,9 +158,6 @@ color:#111827;
 
 }
 
-
-
-/* CONTENT */
 
 section{
 
@@ -274,11 +265,7 @@ flex:1;
 </head>
 
 
-<body>
-
-
-
-<section class="hero">
+<body><section class="hero">
 
 
 <div class="hero-content">
@@ -320,7 +307,11 @@ href="#food">
 </div>
 
 
-</section><section>
+</section>
+
+
+
+<section>
 
 <div class="glass">
 
@@ -411,6 +402,50 @@ A week of beach days, pool time, food, laughs, and making memories.
 
 
 
+<!-- WHO'S COMING SECTION -->
+
+<section>
+
+
+<div class="glass">
+
+
+<div class="sectionTitle">
+
+👥 Who's Coming
+
+</div>
+
+
+<div class="sectionSub">
+
+The official OBX 2027 crew list.
+
+</div>
+
+
+
+<div class="card">
+
+
+<div id="comingList">
+
+Loading crew...
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
 
 <section id="food">
 
@@ -478,13 +513,7 @@ If you finish the pot, start another one.
 </div>
 
 
-</section>
-
-
-
-
-
-<section>
+</section><section>
 
 
 <div class="glass">
@@ -683,7 +712,11 @@ Your favorite vacation stuff
 </div>
 
 
-</section><footer style="
+</section>
+
+
+
+<footer style="
 padding:60px 18px 40px;
 text-align:center;
 ">
@@ -755,39 +788,106 @@ Family Vacation InfoHub
 
 
 
-<script>
+<script type="module">
 
 
-// Countdown can be turned on later when desired
-
-const tripDate = new Date("August 7, 2027 16:00:00").getTime();
-
+import { initializeApp } from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
-function updateCountdown(){
+import { 
+getFirestore,
+collection,
+getDocs,
+query,
+where
+} from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-const now = new Date().getTime();
+const firebaseConfig = {
 
-const distance = tripDate - now;
+apiKey: "AIzaSyAmdsdhHQagqHIbhtY1JhEmsvpNBtGcYKo",
+
+authDomain: "obx2027-5a536.firebaseapp.com",
+
+projectId: "obx2027-5a536",
+
+storageBucket: "obx2027-5a536.firebasestorage.app",
+
+messagingSenderId: "1003642407899",
+
+appId: "1:1003642407899:web:2961f1f362189db10db5fe"
+
+};
 
 
-if(distance <= 0){
+const app = initializeApp(firebaseConfig);
 
-return;
+const db = getFirestore(app);
+
+
+
+async function loadComing(){
+
+
+const q = query(
+
+collection(db,"rsvps"),
+
+where("approved","==",true)
+
+);
+
+
+
+const snapshot = await getDocs(q);
+
+
+let html = "";
+
+
+snapshot.forEach((item)=>{
+
+
+const r = item.data();
+
+
+html += `
+
+<div style="margin-bottom:20px;">
+
+<b>🔥 ${r.name || "Family"}</b>
+
+<br>
+
+${r.adults || 0} adults
+
+<br>
+
+${r.kids || 0} kids
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById("comingList").innerHTML =
+
+html || "Nobody has been approved yet 😢";
+
 
 }
 
 
-}
 
-
-
-updateCountdown();
-
+loadComing();
 
 
 </script>
+
 
 
 </body>
