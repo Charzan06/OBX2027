@@ -853,19 +853,18 @@ snapshot.forEach((item)=>{
 const r = item.data();
 
 
+html let displayName = r.adultNames || r.name || "Family";
+
+if(Number(r.kids || 0) > 0){
+    displayName += " + Family";
+}
+
+
 html += `
 
 <div style="margin-bottom:20px;">
 
-<b>🔥 ${r.name || "Family"}</b>
-
-<br>
-
-${r.adults || 0} adults
-
-<br>
-
-${r.kids || 0} kids
+<b>🔥 ${displayName}</b>
 
 </div>
 
