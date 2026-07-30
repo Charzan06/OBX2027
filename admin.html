@@ -4,115 +4,218 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>OBX Admin RSVP</title>
+<title>OBX Admin</title>
+
 
 <style>
 
 body{
+
 font-family:Arial,sans-serif;
-background:#082f49;
+
+background:#06243d;
+
 color:white;
+
 padding:20px;
+
 }
 
-h1{
-text-align:center;
-}
-
-.stats{
-max-width:650px;
-margin:20px auto;
-background:#0ea5e9;
-padding:20px;
-border-radius:20px;
-font-size:1.1rem;
-font-weight:bold;
-}
 
 .card{
+
 background:white;
+
 color:#111;
-max-width:650px;
+
+max-width:700px;
+
 margin:20px auto;
+
 padding:25px;
+
 border-radius:20px;
+
 }
 
-.rsvp{
-border:2px solid #0284c7;
-padding:15px;
-border-radius:15px;
-margin-top:15px;
+
+h1,h2{
+
+text-align:center;
+
 }
+
+
+.rsvp,
+.message{
+
+border:2px solid #0284c7;
+
+padding:15px;
+
+border-radius:15px;
+
+margin-top:15px;
+
+}
+
 
 .name{
-font-size:1.35rem;
+
+font-size:1.3rem;
+
 font-weight:bold;
+
 color:#0284c7;
+
 }
 
-.date{
-font-size:.9rem;
-color:#64748b;
-margin-top:8px;
-}
-
-.statusApproved{
-color:#16a34a;
-font-weight:bold;
-}
-
-.statusWaiting{
-color:#ca8a04;
-font-weight:bold;
-}
 
 button{
+
+width:100%;
+
 padding:12px;
-border:none;
-border-radius:12px;
+
+margin-top:8px;
+
+border:0;
+
+border-radius:10px;
+
 font-weight:bold;
-margin-top:10px;
-margin-right:8px;
+
 cursor:pointer;
+
 }
+
 
 .approve{
+
 background:#16a34a;
+
 color:white;
+
 }
 
-.unapprove{
-background:#eab308;
-color:black;
-}
 
 .delete{
+
 background:#dc2626;
+
 color:white;
+
 }
+
+
+.edit{
+
+background:#f59e0b;
+
+color:white;
+
+}
+
+
+.save{
+
+background:#0284c7;
+
+color:white;
+
+}
+
+
+.status{
+
+margin-top:10px;
+
+font-weight:bold;
+
+}
+
+
+input,textarea{
+
+width:100%;
+
+padding:12px;
+
+border-radius:10px;
+
+border:1px solid #ccc;
+
+box-sizing:border-box;
+
+font-size:16px;
+
+}
+
+
+textarea{
+
+height:100px;
+
+}
+
+
+hr{
+
+margin:40px 0;
+
+}
+
 
 </style>
 
+
 </head>
+
 
 <body>
 
-<h1>🔥 OBX 2027 RSVP Admin</h1>
 
-<div class="stats" id="stats">
-Loading totals...
-</div>
+<h1>
+🔥 OBX 2027 Admin
+</h1>
+
+
 
 <div class="card">
 
-<div id="list">
+<h2>
+👥 RSVPs
+</h2>
+
+
+<div id="rsvpList">
 
 Loading RSVPs...
 
 </div>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2>
+💬 Messages
+</h2>
+
+
+<div id="messageList">
+
+Loading Messages...
+
+</div>
+
 
 </div><script type="module">
 
@@ -122,12 +225,23 @@ import { initializeApp } from
 
 
 import { 
+
 getFirestore,
+
 collection,
+
 getDocs,
+
 doc,
+
 updateDoc,
-deleteDoc
+
+deleteDoc,
+
+query,
+
+orderBy
+
 } from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -157,71 +271,27 @@ const db = getFirestore(app);
 
 
 
+
+// LOAD RSVPS
+
+
 async function loadRSVPs(){
 
 
 const snapshot = await getDocs(collection(db,"rsvps"));
 
 
-let people=[];
+let html="";
+
 
 
 snapshot.forEach((item)=>{
 
-people.push({
 
-id:item.id,
-
-...item.data()
-
-});
-
-});
+const r=item.data();
 
 
-// newest first
-
-people.sort((a,b)=>{
-
-let dateA = a.created?.toDate ? a.created.toDate() : new Date(0);
-
-let dateB = b.created?.toDate ? b.created.toDate() : new Date(0);
-
-return dateB-dateA;
-
-});
-
-
-
-let html="";
-
-
-let adults=0;
-
-let kids=0;
-
-
-
-people.forEach((r)=>{
-
-
-const displayName = r.adultNames || r.name || "No Name";
-
-
-adults += Number(r.adults || 0);
-
-kids += Number(r.kids || 0);
-
-
-
-let submitted="Unknown";
-
-
-if(r.created?.toDate){
-
-submitted = r.created.toDate().toLocaleString();
-
-}
+let name=r.adultNames || r.name || "No Name";
 
 
 
@@ -233,7 +303,7 @@ html += `
 
 <div class="name">
 
-🔥 ${displayName}
+🔥 ${name}
 
 </div>
 
@@ -252,20 +322,152 @@ Kids: ${r.kids || 0}
 Kids Ages: ${r.kidsAges || "none"}
 
 
-<br><br>
+<div class="status">
 
-
-<div class="${r.approved ? "statusApproved":"statusWaiting"}">
-
-${r.approved ? "✅ Approved" : "🟡 Waiting Approval"}
+${r.approved ? "✅ Approved" : "🟡 Waiting"}
 
 </div>
 
 
 
-<div class="date">
+<button class="approve"
 
-Submitted: ${submitted}
+onclick="approveRSVP('${item.id}')">
+
+${r.approved ? "↩️ Unapprove" : "✅ Approve"}
+
+</button>
+
+
+
+<button class="delete"
+
+onclick="deleteRSVP('${item.id}')">
+
+🗑 Delete RSVP
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+});
+
+
+
+document.getElementById("rsvpList").innerHTML =
+
+html || "No RSVPs";
+
+
+}
+
+
+
+
+window.approveRSVP = async function(id){
+
+
+const ref=doc(db,"rsvps",id);
+
+
+const snap = await getDocs(collection(db,"rsvps"));
+
+
+
+for(const x of snap){
+
+
+if(x.id===id){
+
+
+await updateDoc(ref,{
+
+approved: !x.data().approved
+
+});
+
+
+break;
+
+}
+
+
+}
+
+
+
+loadRSVPs();
+
+
+}
+
+
+
+
+
+window.deleteRSVP = async function(id){
+
+
+await deleteDoc(doc(db,"rsvps",id));
+
+
+loadRSVPs();
+
+
+}
+
+
+// LOAD MESSAGES
+
+
+async function loadMessages(){
+
+
+const q = query(
+
+collection(db,"messages"),
+
+orderBy("created","desc")
+
+);
+
+
+
+const snapshot = await getDocs(q);
+
+
+let html="";
+
+
+
+snapshot.forEach((item)=>{
+
+
+const m=item.data();
+
+
+
+html += `
+
+
+<div class="message">
+
+
+<b>${m.name || "Unknown"}</b>
+
+
+<br><br>
+
+
+<div id="text-${item.id}">
+
+${m.message}
 
 </div>
 
@@ -274,21 +476,11 @@ Submitted: ${submitted}
 <br>
 
 
-<button class="approve"
+<button class="edit"
 
-onclick="approve('${r.id}')">
+onclick="editMessage('${item.id}','${m.message.replace(/'/g,"\\'")}')">
 
-✅ Approve
-
-</button>
-
-
-
-<button class="unapprove"
-
-onclick="unapprove('${r.id}')">
-
-↩️ Unapprove
+✏️ Edit
 
 </button>
 
@@ -296,7 +488,7 @@ onclick="unapprove('${r.id}')">
 
 <button class="delete"
 
-onclick="removeRSVP('${r.id}')">
+onclick="deleteMessage('${item.id}')">
 
 🗑 Delete
 
@@ -315,76 +507,77 @@ onclick="removeRSVP('${r.id}')">
 
 
 
-document.getElementById("list").innerHTML =
+document.getElementById("messageList").innerHTML =
 
-html || "No RSVPs yet.";
-
-
-
-document.getElementById("stats").innerHTML =
-
-"RSVPs: " + people.length +
-
-"<br>Adults: " + adults +
-
-"<br>Kids: " + kids +
-
-"<br>Total People: " + (adults + kids);
-
+html || "No messages yet.";
 
 
 }
 
 
 
-window.approve = async function(id){
+
+window.deleteMessage = async function(id){
 
 
-await updateDoc(doc(db,"rsvps",id),{
-
-approved:true
-
-});
+await deleteDoc(doc(db,"messages",id));
 
 
-loadRSVPs();
+loadMessages();
 
 
 }
 
 
 
-window.unapprove = async function(id){
+
+window.editMessage = async function(id,current){
 
 
-await updateDoc(doc(db,"rsvps",id),{
+const newText = prompt(
 
-approved:false
+"Edit message:",
 
-});
+current
+
+);
 
 
-loadRSVPs();
+
+if(!newText){
+
+return;
+
+}
+
+
+
+await updateDoc(
+
+doc(db,"messages",id),
+
+{
+
+message:newText
+
+}
+
+);
+
+
+
+loadMessages();
 
 
 }
 
 
 
-window.removeRSVP = async function(id){
-
-
-await deleteDoc(doc(db,"rsvps",id));
-
 
 loadRSVPs();
 
+loadMessages();
 
-}
-
-
-
-loadRSVPs();
 
 
 </script>
