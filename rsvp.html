@@ -10,52 +10,167 @@
 
 <style>
 
-body{
-font-family:Arial,sans-serif;
-background:#06243d;
-color:white;
-padding:25px;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:'Inter',sans-serif;
 }
 
-.box{
-background:white;
-color:#111;
-border-radius:20px;
+body{
+
+min-height:100vh;
+
+background:
+linear-gradient(
+rgba(3,40,70,.65),
+rgba(3,20,40,.85)
+),
+url("images/2027%20OBX%20INFOHUB.png");
+
+background-size:cover;
+
+background-position:center;
+
+background-attachment:fixed;
+
 padding:25px;
-max-width:500px;
-margin:auto;
+
+color:white;
+
 }
+
+
+.container{
+
+max-width:500px;
+
+margin:40px auto;
+
+}
+
+
+.card{
+
+background:rgba(255,255,255,.95);
+
+color:#0f172a;
+
+padding:30px;
+
+border-radius:30px;
+
+box-shadow:0 20px 50px rgba(0,0,0,.3);
+
+}
+
 
 h1{
+
 text-align:center;
+
+font-size:2.5rem;
+
+margin-bottom:10px;
+
 }
 
-input, select{
-width:100%;
-padding:14px;
-margin:8px 0;
-border-radius:10px;
-border:1px solid #ccc;
-font-size:16px;
+
+.subtitle{
+
+text-align:center;
+
+margin-bottom:25px;
+
 }
+
 
 button{
+
 width:100%;
-padding:16px;
-margin-top:12px;
+
+padding:18px;
+
 border:none;
-border-radius:15px;
-font-size:18px;
-font-weight:bold;
+
+border-radius:18px;
+
+font-size:1.1rem;
+
+font-weight:900;
+
+margin-top:15px;
+
+cursor:pointer;
+
 }
+
 
 .yes{
+
 background:#0284c7;
+
 color:white;
+
 }
 
-.no{
-background:#ddd;
+
+.home{
+
+background:#082f49;
+
+color:white;
+
+}
+
+
+input{
+
+width:100%;
+
+padding:15px;
+
+margin-top:12px;
+
+border-radius:12px;
+
+border:1px solid #ccc;
+
+font-size:16px;
+
+}
+
+
+label{
+
+display:block;
+
+margin-top:15px;
+
+font-weight:700;
+
+}
+
+
+#form{
+
+display:none;
+
+}
+
+
+.success{
+
+display:none;
+
+text-align:center;
+
+font-weight:bold;
+
+font-size:1.2rem;
+
 }
 
 
@@ -67,7 +182,10 @@ background:#ddd;
 <body>
 
 
-<div class="box">
+<div class="container">
+
+
+<div class="card">
 
 
 <h1>
@@ -75,34 +193,63 @@ background:#ddd;
 </h1>
 
 
+<p class="subtitle">
+Operation OBX 2027
+</p>
+
+
+<div id="start">
+
+
 <button class="yes" onclick="showForm()">
+
 😎 Hell Yes, I'm In
+
 </button>
 
 
-<button class="no" onclick="window.location.href='index.html'">
-😢 No, I'm a Loser
+<button class="home" onclick="goHome()">
+
+Back to Main Page
+
 </button>
 
 
-
-<div id="form" style="display:none;">
-
-
-<input id="name" placeholder="Your Name">
+</div>
 
 
-<input id="adults" type="number" placeholder="Number of Adults">
+<div id="form">
 
 
-<input id="kids" type="number" placeholder="Number of Kids">
+<label>
+Your Name
+</label>
+
+<input id="name" placeholder="Who are you?">
 
 
-<input id="ages" placeholder="Kids Ages (optional)">
+<label>
+Adults
+</label>
+
+<input id="adults" type="number" placeholder="How many adults?">
 
 
+<label>
+Kids
+</label>
 
-<button class="yes" onclick="saveRSVP()">
+<input id="kids" type="number" placeholder="How many kids?">
+
+
+<label>
+Kids Ages (optional)
+</label>
+
+<input id="ages" placeholder="Example: 5, 8, 10">
+
+
+<button class="yes" onclick="submitRSVP()">
 
 Submit RSVP
 
@@ -112,19 +259,30 @@ Submit RSVP
 </div>
 
 
+<div id="success" class="success">
+
+🔥 You're on the list!<br><br>
+
+Sending you back...
+
 </div>
 
 
+</div>
 
 
-<script type="module">
+</div><script type="module">
 
 
 import { initializeApp } from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
-import { getFirestore, collection, addDoc } from
+import { 
+getFirestore, 
+collection, 
+addDoc 
+} from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
@@ -153,7 +311,9 @@ const db = getFirestore(app);
 
 
 
-window.showForm=function(){
+window.showForm = function(){
+
+document.getElementById("start").style.display="none";
 
 document.getElementById("form").style.display="block";
 
@@ -161,30 +321,71 @@ document.getElementById("form").style.display="block";
 
 
 
-window.saveRSVP=async function(){
+window.goHome = function(){
+
+window.location.href="index.html";
+
+}
+
+
+
+window.submitRSVP = async function(){
+
+
+const name = document.getElementById("name").value;
+
+const adults = document.getElementById("adults").value;
+
+const kids = document.getElementById("kids").value;
+
+const ages = document.getElementById("ages").value;
+
+
+
+if(!name){
+
+alert("Please enter your name");
+
+return;
+
+}
+
 
 
 await addDoc(collection(db,"rsvps"),{
 
-name:document.getElementById("name").value,
 
-adults:Number(document.getElementById("adults").value),
+name:name,
 
-kids:Number(document.getElementById("kids").value),
+adults:Number(adults || 0),
 
-kidsAges:document.getElementById("ages").value,
+kids:Number(kids || 0),
+
+kidsAges:ages,
 
 attending:true,
 
-date:new Date()
+approved:false,
+
+timestamp:new Date()
+
 
 });
 
 
-alert("RSVP Saved!");
 
+document.getElementById("form").style.display="none";
+
+document.getElementById("success").style.display="block";
+
+
+
+setTimeout(()=>{
 
 window.location.href="index.html";
+
+},2500);
+
 
 
 }
