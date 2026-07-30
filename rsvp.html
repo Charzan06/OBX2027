@@ -10,167 +10,89 @@
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-
 *{
 box-sizing:border-box;
-margin:0;
-padding:0;
-font-family:'Inter',sans-serif;
+font-family:Arial,sans-serif;
 }
 
 body{
-
+margin:0;
 min-height:100vh;
-
+padding:25px;
 background:
-linear-gradient(
-rgba(3,40,70,.65),
-rgba(3,20,40,.85)
-),
+linear-gradient(rgba(0,40,70,.65),rgba(0,20,40,.85)),
 url("images/2027%20OBX%20INFOHUB.png");
 
 background-size:cover;
-
 background-position:center;
-
-background-attachment:fixed;
-
-padding:25px;
-
 color:white;
-
 }
 
 
-.container{
-
+.box{
 max-width:500px;
-
 margin:40px auto;
-
-}
-
-
-.card{
-
-background:rgba(255,255,255,.95);
-
-color:#0f172a;
-
+background:white;
+color:#111;
 padding:30px;
-
-border-radius:30px;
-
-box-shadow:0 20px 50px rgba(0,0,0,.3);
-
+border-radius:25px;
+box-shadow:0 15px 40px rgba(0,0,0,.3);
 }
 
 
 h1{
-
 text-align:center;
-
-font-size:2.5rem;
-
-margin-bottom:10px;
-
+color:#0284c7;
 }
 
 
-.subtitle{
-
+p{
 text-align:center;
-
-margin-bottom:25px;
-
 }
 
 
 button{
-
 width:100%;
-
-padding:18px;
-
-border:none;
-
-border-radius:18px;
-
-font-size:1.1rem;
-
-font-weight:900;
-
+padding:16px;
 margin-top:15px;
-
-cursor:pointer;
-
+border:0;
+border-radius:15px;
+font-size:18px;
+font-weight:bold;
 }
 
 
 .yes{
-
 background:#0284c7;
-
 color:white;
-
 }
 
 
-.home{
-
+.back{
 background:#082f49;
-
 color:white;
-
 }
 
 
 input{
-
 width:100%;
-
-padding:15px;
-
+padding:14px;
 margin-top:12px;
-
-border-radius:12px;
-
+border-radius:10px;
 border:1px solid #ccc;
-
 font-size:16px;
-
-}
-
-
-label{
-
-display:block;
-
-margin-top:15px;
-
-font-weight:700;
-
 }
 
 
 #form{
-
 display:none;
-
 }
 
 
-.success{
-
-display:none;
-
+#message{
 text-align:center;
-
+margin-top:20px;
 font-weight:bold;
-
-font-size:1.2rem;
-
 }
 
 
@@ -182,38 +104,27 @@ font-size:1.2rem;
 <body>
 
 
-<div class="container">
-
-
-<div class="card">
-
+<div class="box">
 
 <h1>
 🔥 RSVP
 </h1>
 
-
-<p class="subtitle">
+<p>
 Operation OBX 2027
 </p>
 
 
 <div id="start">
 
-
 <button class="yes" onclick="showForm()">
-
 😎 Hell Yes, I'm In
-
 </button>
 
 
-<button class="home" onclick="goHome()">
-
-Back to Main Page
-
+<button class="back" onclick="goHome()">
+Back To Main Page
 </button>
-
 
 </div>
 
@@ -221,62 +132,33 @@ Back to Main Page
 <div id="form">
 
 
-<label>
-Your Name
-</label>
-
-<input id="name" placeholder="Who are you?">
+<input id="name" placeholder="Your Name">
 
 
-<label>
-Adults
-</label>
-
-<input id="adults" type="number" placeholder="How many adults?">
+<input id="adults" type="number" placeholder="Number of Adults">
 
 
-<label>
-Kids
-</label>
-
-<input id="kids" type="number" placeholder="How many kids?">
+<input id="kids" type="number" placeholder="Number of Kids">
 
 
-<label>
-Kids Ages (optional)
-</label>
-
-<input id="ages" placeholder="Example: 5, 8, 10">
+<input id="ages" placeholder="Kids Ages (optional)">
 
 
 <button class="yes" onclick="submitRSVP()">
-
 Submit RSVP
-
 </button>
 
 
 </div>
 
 
-<div id="success" class="success">
-
-🔥 You're on the list!<br><br>
-
-Sending you back...
-
-</div>
-
-
-</div>
+<div id="message"></div>
 
 
 </div><script type="module">
 
-
 import { initializeApp } from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
 
 import { 
 getFirestore, 
@@ -284,7 +166,6 @@ collection,
 addDoc 
 } from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 
 
 const firebaseConfig = {
@@ -302,7 +183,6 @@ messagingSenderId: "1003642407899",
 appId: "1:1003642407899:web:2961f1f362189db10db5fe"
 
 };
-
 
 
 const app = initializeApp(firebaseConfig);
@@ -331,12 +211,14 @@ window.location.href="index.html";
 
 window.submitRSVP = async function(){
 
+try {
+
 
 const name = document.getElementById("name").value;
 
-const adults = document.getElementById("adults").value;
+const adults = Number(document.getElementById("adults").value || 0);
 
-const kids = document.getElementById("kids").value;
+const kids = Number(document.getElementById("kids").value || 0);
 
 const ages = document.getElementById("ages").value;
 
@@ -357,9 +239,9 @@ await addDoc(collection(db,"rsvps"),{
 
 name:name,
 
-adults:Number(adults || 0),
+adults:adults,
 
-kids:Number(kids || 0),
+kids:kids,
 
 kidsAges:ages,
 
@@ -374,18 +256,31 @@ timestamp:new Date()
 
 
 
-document.getElementById("form").style.display="none";
-
-document.getElementById("success").style.display="block";
-
+document.getElementById("message").innerHTML =
+"🔥 RSVP SAVED!<br>Sending you back...";
 
 
-setTimeout(()=>{
+setTimeout(function(){
 
 window.location.href="index.html";
 
 },2500);
 
+
+
+}
+
+catch(error){
+
+
+document.getElementById("message").innerHTML =
+"ERROR: " + error.message;
+
+
+console.log(error);
+
+
+}
 
 
 }
