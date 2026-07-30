@@ -10,91 +10,66 @@
 
 <style>
 
-*{
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
 body{
 margin:0;
+padding:20px;
 min-height:100vh;
-padding:25px;
-background:
-linear-gradient(rgba(0,40,70,.65),rgba(0,20,40,.85)),
-url("images/2027%20OBX%20INFOHUB.png");
-
-background-size:cover;
-background-position:center;
+font-family:Arial,sans-serif;
+background:#06243d;
 color:white;
 }
 
-
-.box{
+.card{
 max-width:500px;
 margin:40px auto;
 background:white;
 color:#111;
 padding:30px;
 border-radius:25px;
-box-shadow:0 15px 40px rgba(0,0,0,.3);
 }
-
 
 h1{
 text-align:center;
 color:#0284c7;
 }
 
-
-p{
-text-align:center;
+button,input{
+width:100%;
+padding:15px;
+margin-top:12px;
+border-radius:12px;
+font-size:16px;
 }
-
 
 button{
-width:100%;
-padding:16px;
-margin-top:15px;
 border:0;
-border-radius:15px;
-font-size:18px;
 font-weight:bold;
+cursor:pointer;
 }
-
 
 .yes{
 background:#0284c7;
 color:white;
 }
 
-
 .back{
 background:#082f49;
 color:white;
 }
 
-
 input{
-width:100%;
-padding:14px;
-margin-top:12px;
-border-radius:10px;
 border:1px solid #ccc;
-font-size:16px;
 }
-
 
 #form{
 display:none;
 }
 
-
-#message{
-text-align:center;
+#status{
 margin-top:20px;
+text-align:center;
 font-weight:bold;
 }
-
 
 </style>
 
@@ -104,25 +79,22 @@ font-weight:bold;
 <body>
 
 
-<div class="box">
+<div class="card">
 
-<h1>
-🔥 RSVP
-</h1>
+<h1>🔥 RSVP</h1>
 
-<p>
+<p style="text-align:center;">
 Operation OBX 2027
 </p>
 
 
 <div id="start">
 
-<button class="yes" onclick="showForm()">
+<button class="yes" onclick="startRSVP()">
 😎 Hell Yes, I'm In
 </button>
 
-
-<button class="back" onclick="goHome()">
+<button class="back" onclick="location.href='index.html'">
 Back To Main Page
 </button>
 
@@ -131,37 +103,36 @@ Back To Main Page
 
 <div id="form">
 
-
 <input id="name" placeholder="Your Name">
-
 
 <input id="adults" type="number" placeholder="Number of Adults">
 
-
 <input id="kids" type="number" placeholder="Number of Kids">
-
 
 <input id="ages" placeholder="Kids Ages (optional)">
 
 
-<button class="yes" onclick="submitRSVP()">
+<button class="yes" onclick="saveRSVP()">
 Submit RSVP
 </button>
 
 
 </div>
 
+
+<div id="status"></div>
+
+
+</div>
+
+
+
 <script type="module">
 
-import { initializeApp } from 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import { 
-getFirestore,
-collection,
-addDoc
-} from 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 const firebaseConfig = {
@@ -186,7 +157,8 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
-window.showForm = function(){
+
+window.startRSVP=function(){
 
 document.getElementById("start").style.display="none";
 
@@ -195,21 +167,14 @@ document.getElementById("form").style.display="block";
 }
 
 
-window.goHome = function(){
 
-window.location.href="index.html";
-
-}
-
-
-
-window.submitRSVP = async function(){
+window.saveRSVP=async function(){
 
 
 try{
 
 
-const data = {
+const doc = await addDoc(collection(db,"rsvps"),{
 
 name: document.getElementById("name").value,
 
@@ -219,40 +184,30 @@ kids: Number(document.getElementById("kids").value || 0),
 
 kidsAges: document.getElementById("ages").value,
 
-attending: true,
+attending:true,
 
-approved: false,
+approved:false,
 
-created: new Date().toISOString()
+created:new Date()
 
-};
-
-
-const docRef = await addDoc(
-collection(db,"rsvps"),
-data
-);
+});
 
 
-document.getElementById("message").innerHTML =
-"🔥 SAVED!<br><br>Document ID:<br>" + docRef.id;
-
-
-setTimeout(function(){
-
-window.location.href="index.html";
-
-},5000);
+document.getElementById("status").innerHTML =
+"🔥 SAVED!<br><br>ID:<br>" + doc.id;
 
 
 }
 
 
-catch(error){
+catch(e){
 
 
-document.getElementById("message").innerHTML =
-"ERROR:<br>" + error.message;
+document.getElementById("status").innerHTML =
+"ERROR:<br>" + e.message;
+
+
+console.log(e);
 
 
 }
@@ -267,4 +222,3 @@ document.getElementById("message").innerHTML =
 </body>
 
 </html>
-<div 
