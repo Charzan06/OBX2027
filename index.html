@@ -582,6 +582,89 @@ POST MESSAGE
 
 
 
+<section>
+
+<div class="glass">
+
+<div class="sectionTitle">
+
+💬 Family Message Board
+
+</div>
+
+
+<div class="sectionSub">
+
+Questions, updates, jokes, and trip planning.
+
+</div>
+
+
+<div class="card">
+
+
+<input id="messageName"
+
+placeholder="Your name"
+
+style="
+width:100%;
+padding:15px;
+border-radius:15px;
+border:1px solid #ccc;
+font-size:16px;
+">
+
+
+<br><br>
+
+
+<textarea id="messageText"
+
+placeholder="Write a message..."
+
+style="
+width:100%;
+height:130px;
+padding:15px;
+border-radius:15px;
+border:1px solid #ccc;
+font-size:16px;
+resize:none;
+"
+
+></textarea>
+
+
+<br><br>
+
+
+<button
+
+onclick="postMessage()"
+
+style="
+width:100%;
+padding:16px;
+border:none;
+border-radius:15px;
+background:#0284c7;
+color:white;
+font-size:18px;
+font-weight:900;
+"
+
+>
+
+POST MESSAGE
+
+</button>
+
+
+</div>
+
+
+
 <div class="card">
 
 
@@ -592,32 +675,17 @@ Latest Messages
 </h3>
 
 
-<p>
+<div id="messageList">
 
-<strong>Example:</strong><br>
-
-"Who is bringing beach games?"
-
-</p>
-
-
-<hr style="margin:18px 0;">
-
-
-<p>
-
-<strong>Example:</strong><br>
-
-"The kids are already counting down!"
-
-</p>
-
+Loading messages...
 
 </div>
 
 
 </div>
 
+
+</div>
 
 </section>
 
