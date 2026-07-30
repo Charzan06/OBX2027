@@ -175,7 +175,7 @@ try{
 
 await addDoc(collection(db,"rsvps"),{
 
-name: document.getElementById("adultNames").value,
+adultNames: document.getElementById("adultNames").value,
 
 adults: Number(document.getElementById("adults").value || 0),
 
