@@ -790,10 +790,8 @@ Family Vacation InfoHub
 
 <script type="module">
 
-
 import { initializeApp } from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
 
 import { 
 getFirestore,
@@ -830,6 +828,8 @@ const db = getFirestore(app);
 
 async function loadComing(){
 
+try{
+
 
 const q = query(
 
@@ -847,17 +847,22 @@ const snapshot = await getDocs(q);
 let html = "";
 
 
+
 snapshot.forEach((item)=>{
 
 
 const r = item.data();
 
 
-html let displayName = r.adultNames || r.name || "Family";
+let displayName = r.adultNames || r.name || "Family";
+
 
 if(Number(r.kids || 0) > 0){
-    displayName += " + Family";
+
+displayName += " + Family";
+
 }
+
 
 
 html += `
@@ -870,12 +875,31 @@ html += `
 
 `;
 
+
+
 });
+
 
 
 document.getElementById("comingList").innerHTML =
 
 html || "Nobody has been approved yet 😢";
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+document.getElementById("comingList").innerHTML =
+
+"Error loading crew";
+
+
+}
 
 
 }
