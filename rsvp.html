@@ -151,19 +151,15 @@ Submit RSVP
 
 </div>
 
-
-<div id="message"></div>
-
-
-</div><script type="module">
+<script type="module">
 
 import { initializeApp } from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import { 
-getFirestore, 
-collection, 
-addDoc 
+getFirestore,
+collection,
+addDoc
 } from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -190,7 +186,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
-
 window.showForm = function(){
 
 document.getElementById("start").style.display="none";
@@ -198,7 +193,6 @@ document.getElementById("start").style.display="none";
 document.getElementById("form").style.display="block";
 
 }
-
 
 
 window.goHome = function(){
@@ -211,73 +205,54 @@ window.location.href="index.html";
 
 window.submitRSVP = async function(){
 
-try {
+
+try{
 
 
-const name = document.getElementById("name").value;
+const data = {
 
-const adults = Number(document.getElementById("adults").value || 0);
+name: document.getElementById("name").value,
 
-const kids = Number(document.getElementById("kids").value || 0);
+adults: Number(document.getElementById("adults").value || 0),
 
-const ages = document.getElementById("ages").value;
+kids: Number(document.getElementById("kids").value || 0),
 
+kidsAges: document.getElementById("ages").value,
 
+attending: true,
 
-if(!name){
+approved: false,
 
-alert("Please enter your name");
+created: new Date().toISOString()
 
-return;
-
-}
-
-
-
-await addDoc(collection(db,"rsvps"),{
+};
 
 
-name:name,
-
-adults:adults,
-
-kids:kids,
-
-kidsAges:ages,
-
-attending:true,
-
-approved:false,
-
-timestamp:new Date()
-
-
-});
-
+const docRef = await addDoc(
+collection(db,"rsvps"),
+data
+);
 
 
 document.getElementById("message").innerHTML =
-"🔥 RSVP SAVED!<br>Sending you back...";
+"🔥 SAVED!<br><br>Document ID:<br>" + docRef.id;
 
 
 setTimeout(function(){
 
 window.location.href="index.html";
 
-},2500);
-
+},5000);
 
 
 }
+
 
 catch(error){
 
 
 document.getElementById("message").innerHTML =
-"ERROR: " + error.message;
-
-
-console.log(error);
+"ERROR:<br>" + error.message;
 
 
 }
@@ -292,3 +267,4 @@ console.log(error);
 </body>
 
 </html>
+<div 
