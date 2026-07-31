@@ -13,159 +13,92 @@
 <style>
 
 body{
-
 font-family:Arial,sans-serif;
-
 background:#06243d;
-
 color:white;
-
 padding:20px;
-
 }
 
 
 .card{
-
 background:white;
-
 color:#111;
-
 max-width:700px;
-
 margin:20px auto;
-
 padding:25px;
-
 border-radius:20px;
-
 }
 
 
 h1,h2{
-
 text-align:center;
-
 }
 
 
-.rsvp,
-.message{
-
-border:2px solid #0284c7;
-
-padding:15px;
-
-border-radius:15px;
-
-margin-top:15px;
-
-}
-
-
-.name{
-
-font-size:1.3rem;
-
-font-weight:bold;
-
-color:#0284c7;
-
+input,textarea,button{
+width:100%;
+padding:14px;
+margin-top:10px;
+border-radius:10px;
+font-size:16px;
+box-sizing:border-box;
 }
 
 
 button{
-
-width:100%;
-
-padding:12px;
-
-margin-top:8px;
-
 border:0;
-
-border-radius:10px;
-
 font-weight:bold;
-
 cursor:pointer;
+}
 
+
+.loginBtn{
+background:#0284c7;
+color:white;
 }
 
 
 .approve{
-
 background:#16a34a;
-
 color:white;
-
 }
 
 
 .delete{
-
 background:#dc2626;
-
 color:white;
-
 }
 
 
 .edit{
-
 background:#f59e0b;
-
 color:white;
-
 }
 
 
-.save{
-
-background:#0284c7;
-
+.logout{
+background:#082f49;
 color:white;
-
 }
 
 
-.status{
+.rsvp,.message{
+border:2px solid #0284c7;
+padding:15px;
+border-radius:15px;
+margin-top:15px;
+}
 
-margin-top:10px;
 
+.name{
+font-size:1.2rem;
 font-weight:bold;
-
+color:#0284c7;
 }
 
 
-input,textarea{
-
-width:100%;
-
-padding:12px;
-
-border-radius:10px;
-
-border:1px solid #ccc;
-
-box-sizing:border-box;
-
-font-size:16px;
-
-}
-
-
-textarea{
-
-height:100px;
-
-}
-
-
-hr{
-
-margin:40px 0;
-
+.hidden{
+display:none;
 }
 
 
@@ -181,31 +114,56 @@ margin:40px 0;
 <h1>
 🔥 OBX 2027 Admin
 </h1>
+
+
+
 <div id="loginBox" class="card">
 
-<h2>🔒 Admin Login</h2>
+
+<h2>
+🔒 Admin Login
+</h2>
+
 
 <input id="email" type="email" placeholder="Email">
 
-<br><br>
 
 <input id="password" type="password" placeholder="Password">
 
-<br><br>
 
-<button onclick="login()" class="approve">
+<button class="loginBtn" onclick="login()">
 
-Login
+LOGIN
 
 </button>
+
+
+<div id="loginStatus"></div>
+
 
 </div>
 
 
-<div id="adminContent" style="display:none;">
+
+
+<div id="adminArea" class="hidden">
 
 
 <div class="card">
+
+
+<button class="logout" onclick="logout()">
+
+LOGOUT
+
+</button>
+
+
+</div>
+
+
+<div class="card">
+
 
 <h2>
 👥 RSVPs
@@ -222,9 +180,8 @@ Loading RSVPs...
 </div>
 
 
-
-
 <div class="card">
+
 
 <h2>
 💬 Messages
@@ -238,6 +195,9 @@ Loading Messages...
 </div>
 
 
+</div>
+
+
 </div><script type="module">
 
 
@@ -245,7 +205,7 @@ import { initializeApp } from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
-import { 
+import {
 
 getFirestore,
 
@@ -265,6 +225,20 @@ orderBy
 
 } from 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+import {
+
+getAuth,
+
+signInWithEmailAndPassword,
+
+signOut,
+
+onAuthStateChanged
+
+} from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 
@@ -288,22 +262,131 @@ appId: "1:1003642407899:web:2961f1f362189db10db5fe"
 
 const app = initializeApp(firebaseConfig);
 
+
 const db = getFirestore(app);
 
 
+const auth = getAuth(app);
 
 
+
+
+
+// LOGIN
+
+
+window.login = async function(){
+
+
+const email =
+document.getElementById("email").value;
+
+
+const password =
+document.getElementById("password").value;
+
+
+
+try{
+
+
+await signInWithEmailAndPassword(
+
+auth,
+
+email,
+
+password
+
+);
+
+
+
+}
+
+catch(error){
+
+
+document.getElementById("loginStatus").innerHTML =
+
+"❌ Login failed";
+
+
+console.log(error);
+
+
+}
+
+
+}
+
+
+
+
+
+// LOGOUT
+
+
+window.logout = function(){
+
+
+signOut(auth);
+
+
+}
+
+
+
+
+
+// WATCH LOGIN STATE
+
+
+onAuthStateChanged(auth,(user)=>{
+
+
+if(user){
+
+
+document.getElementById("loginBox").style.display="none";
+
+
+document.getElementById("adminArea").style.display="block";
+
+
+loadRSVPs();
+
+
+loadMessages();
+
+
+}
+
+
+else{
+
+
+document.getElementById("loginBox").style.display="block";
+
+
+document.getElementById("adminArea").style.display="none";
+
+
+}
+
+
+});
 // LOAD RSVPS
-
 
 async function loadRSVPs(){
 
 
-const snapshot = await getDocs(collection(db,"rsvps"));
+const snapshot = await getDocs(
+collection(db,"rsvps")
+);
 
 
 let html="";
-
 
 
 snapshot.forEach((item)=>{
@@ -312,12 +395,10 @@ snapshot.forEach((item)=>{
 const r=item.data();
 
 
-let name=r.adultNames || r.name || "No Name";
-
+let name = r.adultNames || r.name || "No Name";
 
 
 html += `
-
 
 <div class="rsvp">
 
@@ -331,7 +412,6 @@ html += `
 
 <br>
 
-
 Adults: ${r.adults || 0}
 
 <br>
@@ -343,19 +423,20 @@ Kids: ${r.kids || 0}
 Kids Ages: ${r.kidsAges || "none"}
 
 
-<div class="status">
+<br><br>
+
+
+Status:
 
 ${r.approved ? "✅ Approved" : "🟡 Waiting"}
-
-</div>
 
 
 
 <button class="approve"
 
-onclick="approveRSVP('${item.id}')">
+onclick="toggleApprove('${item.id}',${r.approved || false})">
 
-${r.approved ? "↩️ Unapprove" : "✅ Approve"}
+${r.approved ? "↩️ Remove Approval" : "✅ Approve"}
 
 </button>
 
@@ -373,8 +454,8 @@ onclick="deleteRSVP('${item.id}')">
 
 </div>
 
-
 `;
+
 
 
 });
@@ -383,7 +464,7 @@ onclick="deleteRSVP('${item.id}')">
 
 document.getElementById("rsvpList").innerHTML =
 
-html || "No RSVPs";
+html || "No RSVPs yet";
 
 
 }
@@ -391,36 +472,23 @@ html || "No RSVPs";
 
 
 
-window.approveRSVP = async function(id){
+// APPROVE / UNAPPROVE
 
 
-const ref=doc(db,"rsvps",id);
+window.toggleApprove = async function(id,current){
 
 
-const snap = await getDocs(collection(db,"rsvps"));
+await updateDoc(
 
+doc(db,"rsvps",id),
 
+{
 
-for(const x of snap){
-
-
-if(x.id===id){
-
-
-await updateDoc(ref,{
-
-approved: !x.data().approved
-
-});
-
-
-break;
+approved: !current
 
 }
 
-
-}
-
+);
 
 
 loadRSVPs();
@@ -430,12 +498,21 @@ loadRSVPs();
 
 
 
+
+// DELETE RSVP
 
 
 window.deleteRSVP = async function(id){
 
 
-await deleteDoc(doc(db,"rsvps",id));
+if(confirm("Delete this RSVP?")){
+
+
+await deleteDoc(
+
+doc(db,"rsvps",id)
+
+);
 
 
 loadRSVPs();
@@ -444,6 +521,7 @@ loadRSVPs();
 }
 
 
+}
 // LOAD MESSAGES
 
 
@@ -473,7 +551,6 @@ snapshot.forEach((item)=>{
 const m=item.data();
 
 
-
 html += `
 
 
@@ -486,20 +563,16 @@ html += `
 <br><br>
 
 
-<div id="text-${item.id}">
+<div>
 
-${m.message}
+${m.message || ""}
 
 </div>
 
 
-
-<br>
-
-
 <button class="edit"
 
-onclick="editMessage('${item.id}','${m.message.replace(/'/g,"\\'")}')">
+onclick="editMessage('${item.id}')">
 
 ✏️ Edit
 
@@ -514,7 +587,6 @@ onclick="deleteMessage('${item.id}')">
 🗑 Delete
 
 </button>
-
 
 
 </div>
@@ -538,28 +610,15 @@ html || "No messages yet.";
 
 
 
-window.deleteMessage = async function(id){
+// EDIT MESSAGE
 
 
-await deleteDoc(doc(db,"messages",id));
-
-
-loadMessages();
-
-
-}
-
-
-
-
-window.editMessage = async function(id,current){
+window.editMessage = async function(id){
 
 
 const newText = prompt(
 
-"Edit message:",
-
-current
+"New message text:"
 
 );
 
@@ -595,15 +654,35 @@ loadMessages();
 
 
 
-loadRSVPs();
+// DELETE MESSAGE
+
+
+window.deleteMessage = async function(id){
+
+
+if(confirm("Delete this message?")){
+
+
+await deleteDoc(
+
+doc(db,"messages",id)
+
+);
+
 
 loadMessages();
+
+
+}
+
+
+}
 
 
 
 </script>
 
-</div>
+
 </body>
 
 </html>
